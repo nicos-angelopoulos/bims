@@ -1,0 +1,5 @@
+:- pvars( psplit(Lst,_E,_L,_R), [Lgt-length(Lst,Lgt)] ). 
+
+1/X :: X :: psplit( [H|T], H, [], T ).
+(1 - 1/X) :: X :: psplit( [H|T], El, [H|L], R ) :-
+				[(X - 1)]:: psplit( T, El, L, R ).

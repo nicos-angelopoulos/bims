@@ -1,0 +1,2 @@
+move module names to ones prefixed with bims_
+  so: data -> bims_data  (also the ones for dlps

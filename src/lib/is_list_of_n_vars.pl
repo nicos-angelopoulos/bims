@@ -1,0 +1,1 @@
+../../../../../lib/src/list/is_list_of_n_vars.pl

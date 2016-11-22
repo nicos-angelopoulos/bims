@@ -1,0 +1,6 @@
+digraph G {
+  graph [URL="default.html", BGURL="smbluewhite_paper.gif "]
+  node [style=filled]
+
+  // edge URLs are not supported by imagemap clients, but they are allowed.
+  edge [color=red]

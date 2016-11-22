@@ -1,0 +1,5 @@
+:- pvars( pselect(L,_E,_R), [T-length(L,T)] ). 
+
+1/X :: X :: pselect( [H|T], H, T ).
+(1 - 1/X) :: X :: pselect( [H|T], El, [H|R] ) :-
+				[(X - 1)]:: pselect( T, El, R ).

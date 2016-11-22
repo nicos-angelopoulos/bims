@@ -1,0 +1,1 @@
+../../../../../lib/src/compat/sicstus/sics39_pncms.pl

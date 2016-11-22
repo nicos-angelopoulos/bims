@@ -1,0 +1,1 @@
+../../../../../lib/src/term/name_term.pl

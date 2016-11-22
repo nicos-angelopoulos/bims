@@ -1,0 +1,12 @@
+put the transformed program to a separate file, not -stats
+
+Start using modules:
+	likelihood    bims_lkl
+	data          bims_data  (carts then use data: for the actual data)
+	prior         (i think this is already the case, add name here)
+
+Delete
+	the modules 
+
+Test 
+	by runing a run of carts then one of bns

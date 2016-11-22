@@ -1,0 +1,1 @@
+../../../../../lib/src/meta/goal_spec.pl

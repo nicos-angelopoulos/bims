@@ -1,0 +1,45 @@
+
+:- els( gamma_sf ).
+
+bn( Bn ) :-
+	once( data:nodes(Nodes) ),
+	bn( Nodes, 1, 1, [], Bn ).
+
+bn( [], _M, _A, _Nodes, _Aux, [] ).
+bn( [H|T], M, A, Nodes, Aux, [H-Pas|TBn] ) :-
+	select( H, Nodes, Hodes ),
+	select_acyclic_parents( Hodes, H, Aux, PotPa ),
+	parental_probability( PotPa, M, A, Prb ),
+	Prb::family( PotPa, Pas ),
+	add_parents_aux( Pas, H, Aux, Nxt ),
+	bn( T, M, A, Nodes, Nxt, TBn ).
+
+   1 :: _ :: family( [], [] ).
+
+   G :: [G] :: family( [H|T], [H|TPa] ) :-
+                           G :: family( T, TPa ).
+ 1-G :: [G] :: family( [_H|T], Pa ) :-
+                           G :: family( T, Pa ).
+
+select_acyclic_parents( [], _Node, _Aux, [] ).
+select_acyclic_parents( [Pa|T], Node, Aux, PotPa ) :-
+	acyclic_edge( Pa, Node, Aux, Nxt, PotPa, TPot ),
+	select_acyclic_parents( T, Node, Nxt, TPot ).
+
+parental_probability( [], _M, _A, 1 ) :- !.
+parental_probability( PotPa, M, A, Prb ) :-
+	length( PotPa, LenPPa ),
+	gamma( M, A, G ),
+	Prb is min( G/LenPPa,0.9 ).
+
+add_parents_aux( [], _Node, Aux, Aux ).
+add_parents_aux( [H|T], Node, Aux, Out ) :-
+	add_edges( Aux, [H-Node], Nxt ),
+	add_parents_aux( T, Node, Nxt, Out ).
+
+acyclic_edge( Pa, Node, Aux, Nxt, PotPa, TPot ) :-
+	add_edges( Aux, [Pa-Node], Nxt ),
+	top_sort( Nxt, _Sort ),
+	!,
+	PotPa = [Pa|TPot].
+acyclic_edge( _Pa, _Node, Aux, Aux, TPot, TPot ).

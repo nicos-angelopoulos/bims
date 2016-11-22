@@ -1,0 +1,34 @@
+
+:- ensure_loaded( library(lists) ).     % select/3.
+
+:- els( break_cycles_mod ).
+:- els( gamma_sf ).
+
+bn( Bn ) :-
+	once( data:nodes(Nodes) ),
+	bn( Nodes, 1, 1, Bn ).
+
+bn( Nodes, M, A, Cycled ) :-
+     length( Nodes, NpopSize ),
+     Pop is NpopSize - 1,
+     bn( Nodes, M, A, Pop, Nodes, Cycled ).
+     % break_bn_cycles( Cycled, Bn ).
+
+bn( [], _M, _A, _Pop, _Nodes, [] ).
+bn( [H|T], M, A, Pop, Nodes, [H-Pa|TBn] ) :-
+     % Incl is min(Avg/(PaSize+1e-6),3/(PaSize+1e-6)),
+     % write( user_error, incl(Incl) ), nl( user_error ),
+     select( H, Nodes, PotPa ),
+     gamma( M, A, G ),
+     Prb is min(G/Pop,0.9),
+     Prb :: family( PotPa, Pa ),
+     % Prb ## family( PotPa, Pa ),
+     bn( T, M, A, Pop, Nodes, TBn ).
+
+   1 :: _ :: family( [], [] ).
+
+   G :: [G] :: family( [H|T], [H|TPa] ) :-
+                           G :: family( T, TPa ).
+ 1-G :: [G] :: family( [_H|T], Pa ) :-
+                           G :: family( T, Pa ).
+

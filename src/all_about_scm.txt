@@ -1,0 +1,14 @@
+scm stands for single component M-H
+
+To use, you must also define the following preds, 
+scm_gen_each_vid( Model, Id ). 
+	On backtracking generate all alteration Ids for Model.
+scm_gen_vstructure( A, B, C, D, E ).
+scm_gen_vstructure( MOD, Id, VMOD, V, Old )
+	part of MOD identified by ID, is replaced with variable V to give VMOD.
+	Old, is the replaced part.
+	
+scm_rel_likelihood/3
+	scm_rel_likelihood( NewFamily, OldFamily, RelL )
+
+See bns/src/bns_scm.pl .
