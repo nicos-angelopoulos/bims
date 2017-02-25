@@ -1,15 +1,9 @@
 
-os_unique_by_date_defaults( Defs ) :- 
-     Defs = [ date_sep('.'),token_sep('-'),by([ye,mo,da,[ho,mi],[se]]),place_token(before),
-              type(dir), max_length(ya,2), min_length(_,2),ext(csv) ].
-
 :- use_module( library(date) ).
-% :- use_module( library(options) ).
-:- requires( options_append/3 ).
-
 :- ensure_loaded( library(apply) ).
 :- requires( get_date_time/1 ).
 :- requires( break_nth/4 ).
+:- requires( en_list/2 ).
 
 os_unique_by_date_test :-
 	use_module( library(socket) ),  
@@ -36,15 +30,23 @@ os_unique_by_date_test( two ) :-
 % The predicate does not only provide the name of OsEntry, it also creates it. 
 %
 % Opts: 
-%   * by([ye,mo,da,[ho,mi],[se]])  how to group date parts in getting a unique entry. The default does
-%                         YeMoDa first, then adds HoMi and on the thrid attempt adds Seconds.
-%   * date_sep(Dsep='.')     inter date component separator
-%   * ext(Ext=csv)           extension to add to OsEntry iff type is file
-%   * max_length(Dp=ye,Ye=2) max length of date Id (_ye_,_mo_,_da_), and an integer
-%   * min_length(Id='',Len)  min length of date Id (_ye_,_mo_,_da_), and an integer
-%   * place_token(Plc=before),or _after_, where to place the token in relation to the date
-%   * token_sep(Sep='-')     separator to be used in bonding Token and Date
-%   * type(Type=dir)         should the unique entry be a _dir_ectory or a _file_.
+%  * by([ye,mo,da,[ho,mi],[se]]) 
+%    how to group date parts in getting a unique entry. The default does
+%    YeMoDa first, then adds HoMi and on the thrid attempt adds Seconds.
+%  * date_sep(Dsep='.')     
+%    inter date component separator
+%  * ext(Ext=csv)           
+%    extension to add to OsEntry iff type is file
+%  * max_length(Dp=ye,Ye=2) 
+%    max length of date Id (_ye_,_mo_,_da_), and an integer
+%  * min_length(Id='',Len)
+%    min length of date Id (_ye_,_mo_,_da_), and an integer
+%  * place_token(Plc=before)
+%    or _after_, where to place the token in relation to the date
+%  * token_sep(Sep='-')
+%    separator to be used in bonding Token and Date
+%  * type(Type=dir)
+%    should the unique entry be a _dir_ectory or a _file_.
 % 
 % Id and DP can be a free variables in which case they match everything.
 %
@@ -80,11 +82,16 @@ os_unique_by_date_test( two ) :-
 % @version  0.2 2014/5/22
 %
 os_unique_by_date( Tkn, Bname ) :-
-	os_unique_by_date( Tkn, Bname, [] ).
-os_unique_by_date( Tkn, Bname, InOpts ) :-
-	options_append( os_unique_by_date, InOpts, Opts ),
-     memberchk( by(By), Opts ),
-     construct_unique_base_name_by_date( By, Tkn, Opts, Bname ).
+    os_unique_by_date( Tkn, Bname, [] ).
+os_unique_by_date( Tkn, Bname, ArgS ) :-
+    en_list( ArgS, Args ),
+    % options_append( os_unique_by_date, InOpts, Opts ),
+    % os_unique_by_date_defaults( Defs ) :- 
+    Defs = [ date_sep('.'),token_sep('-'),by([ye,mo,da,[ho,mi],[se]]),place_token(before),
+              type(dir), max_length(ya,2), min_length(_,2),ext(csv) ],
+    append( Args, Defs, Opts ),
+    memberchk( by(By), Opts ),
+    construct_unique_base_name_by_date( By, Tkn, Opts, Bname ).
 
 construct_unique_base_name_by_date( By, Tkn, All, Bname ) :-
      partition( atom, By, ByAtoms, ByLists ),

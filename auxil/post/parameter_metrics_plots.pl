@@ -1,4 +1,9 @@
 
+:- ensure_loaded( parameter_metrics ).
+
+:- requires( csv_df/2 ).
+:- requires( en_list/2 ).
+
 :- use_module( library(real) ).
 :- 
 	prolog_load_context( directory, Dir ),
@@ -22,16 +27,15 @@ parameter_metric_plot_defaults( Args, Defs ) :-
 	        exts(pdf)
 		  ].
 
-:- ensure_loaded( parameter_metrics ).
 
-:- requires( options/2 ).
-:- requires( csv_df/2 ).
-
-parameter_metrics_plots( ChPred, RedPred, Args ) :-
-	options_append( parameter_metrics_plots, Args, Opts ),
+parameter_metrics_plots( ChPred, RedPred, ArgS ) :-
+    en_list( ArgS, Args ),
+    parameter_metrics_plots_defaults( Defs ),
+    append( Args, Defs, Opts ),
+	% options_append( parameter_metrics_plots, Args, Opts ),
 	parameter_metrics( ChPred, RedPred, PMprs, Opts ),
-	options( metric_names(Mnames), Opts ),
-	options( parameter_names(Pnames), Opts ),
+	memberchk( metric_names(Mnames), Opts ),
+	memberchk( parameter_names(Pnames), Opts ),
 	maplist( parameter_metric_plot(Pnames,PMprs,Mnames,Opts), Mnames ).
 
 %% parameter_metric_plot( Pnames, PMprs, Mnames, Opts, Mname ).
@@ -41,8 +45,11 @@ parameter_metrics_plots( ChPred, RedPred, Args ) :-
 % * ylab(Ylab=Mname)      y label, the metric name
 % * ylab_prefix(Ylab=Mname) prefixed to Mname to produce Ylab, if given
 %
-parameter_metric_plot( Pnames, PMprs, Mnames, Args, Mname ) :-
-	options_append( parameter_metric_plot, [Mname|Args], Opts ),
+parameter_metric_plot( Pnames, PMprs, Mnames, ArgS, Mname ) :-
+	% options_append( parameter_metric_plot, [Mname|Args], Opts ),
+    en_list( ArgS, Args ),
+    parameter_metric_plot_defaults( Args, Defs ),
+    append( Args, Defs, Opts ),
 	debug( _, 'Ploting metric: ~w', Mname ),
 	once( nth1(N,Mnames,Mname) ),
 	findall( Row, ( member(Pvals-Mvals,PMprs),
@@ -62,7 +69,10 @@ parameter_metric_plot( Pnames, PMprs, Mnames, Args, Mname ) :-
 	pmp_dfs <- summarySE( pmp_df, measurevar=+Mname, groupvars=Pstrings),
 	% pd <- position_dodge(0.1),
 	debug( real ),
-	options( [xlab(Xlab),ylab(Ylab),llab(Llab)], Opts ),
+	memberchk( xlab(Xlab), Opts ),
+    memberchk( ylab(Ylab), Opts ),
+    memberchk( llab(Llab), Opts ),
+    
 	<- print( 
 	        ggplot(pmp_dfs, aes(x=First, y=Mname, colour=Second))
 	         + geom_errorbar(aes(ymin=Mname-se, ymax=Mname+se), width=0.01 )
@@ -79,7 +89,7 @@ parameter_metric_plot( Pnames, PMprs, Mnames, Args, Mname ) :-
     ),
 	<- print( pmp_dfs ),
 
-	options( exts(ExtS), Opts ),
+	memberchk( exts(ExtS), Opts ),
 	to_list( ExtS, Exts ),
 	maplist( gg_save_stem_ext(Mname), Exts ).
 

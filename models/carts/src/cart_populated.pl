@@ -6,7 +6,6 @@
 :- bims:requires( postfix_atom/2 ).
 % :- bims:requires( werr/2 ).
 :- bims:requires( read_terms/2 ).
-:- bims:requires( current_call/1 ).
 
 :- debug( cart_pop ).
 
@@ -97,7 +96,8 @@ data_file_in_module( DataF ) :-
 	throw( fixme(data_file_decl_missing(DataF)) ).
 
 data_terms_feature_indices :-
-	bims:current_call( data:feature_index(1,_) ),
+    current_predicate( data:feature_index/2 ),
+    call( data:feature_index/2 ),
 	!. % fixme: check all requirements are here, not just 
 data_terms_feature_indices :-
 	once( current_predicate( data:data/Arity ) ),

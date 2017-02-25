@@ -1,1 +1,0 @@
-../../../../../lib/src/compat/sicstus/number_codes.pl
