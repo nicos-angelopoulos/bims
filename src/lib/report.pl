@@ -1,5 +1,3 @@
-:- requires( to_list/2 ).
-
 %% report( +Trigger, +This ).
 %
 %  Print This to stream stored in bims_report:stream/1 if Trigger is a printable trigger in the

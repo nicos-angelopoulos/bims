@@ -7,17 +7,17 @@
 :- ensure_loaded( library(system) ).      % /rename_file/2, tmp_file/2.
 
 % :- ensure_loaded( library(cc) ).        % init_cc/0, next_cc/1, bims_bb_get(cc).
-:- requires( cc/0 ).                      % init_cc/0, next_cc/1, bims_bb_get(cc).
-:- requires( head_to_spec/2 ).
-:- requires( unique_filename/2 ).
-:- requires( kv_decompose/3 ).
-:- requires( defined_elsewhere/2 ).
-:- requires( delete_file_if/2 ).
-:- requires( clean_module/1 ).
-:- requires( werr/1 ).
-:- requires( flatten_vs/2 ).
-:- requires( is_letter/1 ).
-:- pl( swi(_), true, requires(to_list/2) ).
+:- lib(cc/0).                      % init_cc/0, next_cc/1, bims_bb_get(cc).
+:- lib(head_to_spec/2).
+:- lib(unique_filename/2).
+:- lib(kv_decompose/3).
+:- lib(defined_elsewhere/2).
+:- lib(delete_file_if/1).
+:- lib(clean_module/1).
+:- lib(werr/1).
+:- lib(flatten_vs/2).
+:- lib(is_letter/1).
+% :- pl( swi(_), true, requires(to_list/2) ).
 
 :- multifile( last_skips/2 ).
 :- dynamic( last_skips/2 ).

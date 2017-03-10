@@ -1,6 +1,6 @@
 :- ensure_loaded( write_list_with_line_numbers ).
 :- dynamic( dbg_this/1 ).
-:- requires( to_list/2 ).
+:- lib( to_list/2 ).
  
 dbg_these( ListPrv ) :-
 	to_list( ListPrv, List ),

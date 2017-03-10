@@ -1,6 +1,6 @@
 
-:- requires( directory_files/2 ).
-:- requires( delete/3 ).
+:- lib(directory_files/2 ).
+:- lib( delete/3 ).
 
 % :- ensure_loaded( library(lists) ).	% delete/3.
 % :- ensure_loaded( library(system) ).	% directory_files/2.

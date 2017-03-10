@@ -7,6 +7,8 @@
 :- ensure_loaded( library(lists) ).		% reverse/2.
 :- ensure_loaded( library(random) ).		%/1.
 
+bp. % loads the file
+
 initial_bp_str( bp, Bp, Bp ).
 initial_bp_str( cp, Bp, 1-1/2-Bp ).
 initial_bp_str( pr, _Bp, pr ).

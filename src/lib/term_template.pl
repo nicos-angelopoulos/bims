@@ -1,1 +1,0 @@
-../../../../../lib/src/term/term_template.pl

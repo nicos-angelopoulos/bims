@@ -1,5 +1,5 @@
-:- requires( directory_files/2 ).
-:- requires( is_a_regular_file/1 ).
+:- lib( directory_files/2 ).
+:- lib( is_a_regular_file/1 ).
 
 directory_files_regular( Dir, Regulars ) :-
 	directory_files( Dir, All ),

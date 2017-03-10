@@ -1,7 +1,7 @@
 % 6 april 2001.
 
-:- ensure_loaded( library(requires) ).
-:- requires( fput_line/2 ).
+:- use_module(library(lib)).
+:- lib(fput_line/2).
 
 %%%  file+stream to_list_of_lines
 list_of_lines_to_file( Lines, File ) :-

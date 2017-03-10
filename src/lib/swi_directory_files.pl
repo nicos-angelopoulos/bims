@@ -1,5 +1,5 @@
-:- ensure_loaded( library(requires) ).
-:- requires( file_to_list_of_lines/2 ).
+:- use_module( library(lib) ).
+:- lib(file_to_list_of_lines/2).
 
 directory_files( Dir, Files ) :-
 	tmp_file( file_directory, Tmp ),

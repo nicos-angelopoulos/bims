@@ -1,4 +1,5 @@
 % :- dynamic cc/1.
+cc.
 
 init_cc :-
 	% retractall( cc(_) ),

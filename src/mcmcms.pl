@@ -20,24 +20,24 @@
 % :- ensure_loaded( model_type_calls ).
 % HERE 2015
 
-:- requires( lss/0 ).
-:- requires( copy_stream_on_stream/2 ).
-:- requires( dbg/1 ).				% dbg/1,2
-:- requires( werr/2 ).				% /1.
-:- requires( error_to_output/2 ).
-:- requires( head_to_spec/2 ).          % fixme: remove this
-:- requires( esr/1 ).
-:- requires( mcmcms_top_dir/0 ).		% bb_puts it.
-:- requires( is_list_of_n_vars/2 ).
-:- requires( to_list/2 ).
-:- requires( unique_filename/3 ).
-:- requires( is_letter/1 ).
-:- requires( assert_unique/1 ).
-:- requires( open_mode/3 ).
-:- requires( call_error/3 ).
-:- requires( bb_default/2 ).
+:- lib(lss/0).
+:- lib(copy_stream_on_stream/2).
+:- lib(dbg/2).				    %
+:- lib(werr/2 ).				% /1.
+:- lib(error_to_output/2).
+:- lib(head_to_spec/2).        % fixme: remove this
+:- lib(esr/1).
+:- lib(mcmcms_top_dir/1).		% bb_puts it.
+:- lib(is_list_of_n_vars/2).
+:- lib(to_list/2).
+:- lib(unique_filename/3).
+:- lib(is_letter/1).
+:- lib(assert_unique/1).
+:- lib(open_mode/3).
+:- lib(call_error/3).
+:- lib(bb_default/2).
 
-:- pl( sicstus(_S), ensure_loaded( library(number_atom) ) ).  		% /2.
+% :- pl( sicstus(_S), ensure_loaded( library(number_atom) ) ).  		% /2.
 
 /** mcmcms( F, S, O, K, M, B, P, R, D, H, Seed, SGl ).
 

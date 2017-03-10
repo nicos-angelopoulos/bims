@@ -1,9 +1,9 @@
 
 :- use_module( library(date) ).
 :- ensure_loaded( library(apply) ).
-:- requires( get_date_time/1 ).
-:- requires( break_nth/4 ).
-:- requires( en_list/2 ).
+:- lib(get_date_time/1).
+:- lib(break_nth/4).
+:- lib(to_list/2).
 
 os_unique_by_date_test :-
 	use_module( library(socket) ),  
@@ -84,7 +84,7 @@ os_unique_by_date_test( two ) :-
 os_unique_by_date( Tkn, Bname ) :-
     os_unique_by_date( Tkn, Bname, [] ).
 os_unique_by_date( Tkn, Bname, ArgS ) :-
-    en_list( ArgS, Args ),
+    to_list( ArgS, Args ),
     % options_append( os_unique_by_date, InOpts, Opts ),
     % os_unique_by_date_defaults( Defs ) :- 
     Defs = [ date_sep('.'),token_sep('-'),by([ye,mo,da,[ho,mi],[se]]),place_token(before),
@@ -104,7 +104,7 @@ construct_unique_base_name_by_date( By, Tkn, All, Bname ) :-
      memberchk( ext(Ext), All ),
 	memberchk( date_sep(DSep), All ),
      atomic_list_concat( Dcomps, DSep, DateBit ),
-	en_list( Tkn, Tkns ), 
+	to_list( Tkn, Tkns ), 
 	memberchk( token_sep(TSep), All ),
 	atomic_list_concat( Tkns, TSep, TknConc ),
 	memberchk( place_token(PlcTkn), All ),

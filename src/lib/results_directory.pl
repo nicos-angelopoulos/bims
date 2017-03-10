@@ -1,5 +1,5 @@
 
-:- requires( os_slashify/2 ).
+:- lib(os_slashify/2).
 
 results_directory( SubDir, Full ) :-
      results_directory( '/tmp/', SubDir, Full ).

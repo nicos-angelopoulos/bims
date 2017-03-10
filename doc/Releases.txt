@@ -1,7 +1,7 @@
 ---   Releases   ---
 --------------------
 
-
+2.1 @ 2017/03/10 - updated to work with pack(lib) v1.1
 2.0 @ 2016/11/29 - copied over a couple of linked files.
 	 @ 2016/11/11 - Two typos in bims/1 doc.
 	 @ 2016/11/04 - Added citations and version pred to interface.

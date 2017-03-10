@@ -1,4 +1,5 @@
-:- requires( kvs_add_v_to_matching_k/4 ).
+
+:- lib(kvs_add_v_to_matching_k/4).
 
 read_term_frequencies( File, Frqs ):-
 	open( File, read, In ), 

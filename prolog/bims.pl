@@ -1,27 +1,24 @@
 :- module( bims, [bims/0,bims/1,bims_version/2,bims_citation/2] ).
 
-:- use_module( library(requires) ).  % lib/1, requires/1.
-
-
+:- use_module( library(lib) ).
 % :- ensure_loaded( '../src/mcmcms' ).
 % :- ensure_loaded( '../src/init_lib' ).
+:- lib( source(bims), homonyms(true) ).
 
-:- assert( lib:lib_homonym(bims,true) ).
+:- lib(mcmcms/12).
+:- lib(os_unique_by_date/2).
+:- lib(write_terms/2).
+:- lib(n_digits/3).
+:- lib(clean_module/1).
+:- lib(report_triggers/1).
+:- lib(bims_bb_remove/2).
+:- lib(remove_template_duplicates/2).
+:- lib(get_date_time/1).
+:- lib(head_to_spec/2).
+:- lib(ord_only_add_elem/3).  % needed on ad_expand
+:- lib(to_list/2).
 
-% :- lib_pack_start( bims, true ).
-:- requires( mcmcms/12 ).
-:- requires( os_unique_by_date/2 ).
-:- requires( write_terms/2 ).
-:- requires( n_digits/3 ).
-:- requires( clean_module/1 ).
-:- requires( report_triggers/1 ).
-:- requires( bims_bb_remove/2 ).
-:- requires( remove_template_duplicates/2 ).
-:- requires( get_date_time/1 ).
-:- requires( en_list/2 ).
-:- requires( head_to_spec/2 ).
-:- requires( ord_only_add_elem/3 ).  % needed on ad_expand
-:- requires( to_list/2 ).
+:- lib(end(bims)).
 % :- lib_pack_end( bims ).
 
 
@@ -100,7 +97,8 @@ the system can be used on new statistical models.
 
 @author Nicos Angelopoulos, http://stoics.org.uk/~nicos
 @author James Cussens (University of York), http://cs.york.ac.uk/~jc
-@version  2.0.0 2017/2/16
+@version  2.0.0 2017/2/21
+@version  2.1.0 2017/3/10
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
@@ -124,7 +122,7 @@ bims_defaults( ArgsPrv, [
                 top_goal(ModelSingular),
                 debug(true)
         ] ) :-
-               en_list( ArgsPrv, Args ),
+               to_list( ArgsPrv, Args ),
                ( (memberchk(results_dir(ArgsDir),Args),ground(ArgsDir)) ->
                     make_directory(ArgsDir)
                     ;
@@ -235,7 +233,7 @@ The predicate generates one results directory (Rdir) and files recording informa
 bims :- bims( [] ).
 
 bims( ArgsPrv ) :-
-    en_list( ArgsPrv, Args ),
+    to_list( ArgsPrv, Args ),
     bims_defaults( Args, Defs ),
     append( Args, Defs, Opts ),
     debug( bims, 'Bims options: ~w', [Opts] ),
@@ -302,7 +300,8 @@ Version Mj:Mn:Fx, and release date date(Y,M,D).
 
 */
 % bims_version( 1:0:0, date(2014,12,15) ).
-bims_version(   2:0:0, date(2017,2,21) ). % IJAR paper
+% bims_version(   2:0:0, date(2017,2,21) ). % IJAR paper
+bims_version( 2:1:0, date(2017,3,10) ).     % pack(lib)
 
 %% bims_citation( -Atom, -Bibterm ).
 %
@@ -387,7 +386,7 @@ bims_lib( Spec ) :-
 bims_option_seeds( Opts, Seeds ) :-
     memberchk( chains(Runs), Opts ),
     memberchk( seeds(PrvSeedS), Opts ),
-    en_list( PrvSeedS, PrvSeeds ),
+    to_list( PrvSeedS, PrvSeeds ),
     length( PrvSeeds, PrvLen ),
     Diff is max( Runs - PrvLen, 0 ),
     last( PrvSeeds, Last ),

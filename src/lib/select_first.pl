@@ -1,4 +1,4 @@
-:- requires( select_all/4 ).
+:- lib( select_all/4 ).
 
 %% select_first( +List, +Elem, -Rem ).
 %

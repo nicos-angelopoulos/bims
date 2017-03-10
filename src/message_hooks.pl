@@ -2,7 +2,7 @@
 mcmcms_message_prefix( error, '! ' ).
 mcmcms_message_prefix( warning, '# ' ).
 
-:- requires( to_functor/2 ).
+:- lib(to_functor/2).
 
 :- multifile( message_hook/3 ).
 :- dynamic( message_hook/3 ).

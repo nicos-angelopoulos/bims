@@ -1,5 +1,3 @@
-:- requires( term_template/2 ).
-
 %% assert_unique( +Fact ).
 %
 % Retractall Fact's template before asserting term.
@@ -20,10 +18,12 @@
 %
 assert_unique( Mod:Term ) :-
 	!,
-	term_template( Term, Fresh ),
+    functor( Term, Name, Arity ),
+    functor( Fresh, Name, Arity ),
 	retractall( Mod:Fresh ),
 	assert( Mod:Term ).
 assert_unique( Term ) :-
-	term_template( Term, Fresh ),
+    functor( Term, Name, Arity ),
+    functor( Fresh, Name, Arity ),
 	retractall( Fresh ),
 	assert( Term ).

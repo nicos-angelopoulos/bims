@@ -8,4 +8,4 @@ packager( 'Nicos Angelopoulos', 'http://stoics.org.uk/~nicos' ).
 maintainer( 'Nicos Angelopoulos', 'http://stoics.org.uk/~nicos' ).
 home( 'http://stoics.org.uk/~nicos/sware/bims' ).
 download( 'http://stoics.org.uk/~nicos/sware/packs/bims/bims-*.tgz' ).
-requires(requires).
+requires(lib).

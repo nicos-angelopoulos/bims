@@ -4,9 +4,9 @@
 % :- op( 1100, xfy, ^ ).
 
 :- use_module( library(lists) ).		% nth/3.
-:- requires( bims:head_to_spec/2 ).
-:- requires( bims:ord_only_add_elem/3 ).
-:- requires( bims:to_list/2 ).
+:- lib(head_to_spec/2).
+:- lib(ord_only_add_elem/3).
+:- lib(to_list/2).
 
 :- dynamic user:term_expansion/2.
 :- dynamic ad:s_label/2.

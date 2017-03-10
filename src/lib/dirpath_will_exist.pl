@@ -1,8 +1,5 @@
 
-:- ensure_loaded( library(system) ).  % working_directory/2.
-% :- ensure_loaded( library(is_a_directory) ).  		% /1.
 :- ensure_loaded( library(dirpath_first_dir_and) ).	% /3.
-:- pl( yap(_), requires(exists_directory/1) ).
 
 dirpath_will_exist( DirPath ) :-
 	working_directory( Origin, Origin ),

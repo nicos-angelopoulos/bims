@@ -1,7 +1,6 @@
 
-:- requires( directory_files_nodots/2 ).
-:- requires( is_a_directory/1 ).
-:- requires( is_a_regular_file/1 ).
+:- lib(is_a_regular_file/1).
+:- lib(directory_files_nodots/2).
 	
 directory_contents( Dir, Files, SubDirs, Other ) :-
 	directory_files_nodots( Dir, Entries ),
@@ -16,7 +15,7 @@ split_directory_contents( [H|T], Files, SubDirs, Other ) :-
 		SubDirs = TSubDirs,
 		Other = TOther
 		;
-		( is_a_directory(H) ->
+		( exists_directory(H) ->
 			Files = TFiles,
 			SubDirs = [H|TSubDirs],
 			Other = TOther

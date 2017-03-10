@@ -1,7 +1,7 @@
 % :- ensure_loaded( 'lib/els' ).
 
-:- dynamic( ad:slp_clause/2 ).
-:- requires( clean_module/1 ).
+:- dynamic(ad:slp_clause/2).
+:- lib(clean_module/1).
 
 % all_dynamic( +File ) :-
 % Use term_expansion/2 (defined in ad_expand),

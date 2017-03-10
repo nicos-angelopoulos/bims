@@ -1,15 +1,14 @@
 :- ensure_loaded( library(lists) ).
 :- ensure_loaded( construct_scall ).		% spec_constructs_scall/5,
                                              % pred_type_constructs_scall/5.
-% :- pl( swi(_), ensure_loaded(jump_swi), ensure_loaded(jump) ).
-:- pl( swi(_), requires(jump_swi/0), requires(jump/0) ).
-
-:- requires( bp/0 ).  % assorted preds
-:- requires( on_random/5 ).
-:- requires( nst_length/3 ).
-:- requires( rev_append/3 ).
-:- requires( n_distinct_randoms_in/4 ).
-:- requires( report/2 ).
+% :- pl( swi(_), lib(jump_swi/0), lib(jump/0) ).
+:- lib(jump/9).
+:- lib(bp/0).  % assorted preds
+:- lib(on_random/6).
+:- lib(nst_length/3).
+:- lib(rev_append/3).
+:- lib(n_distinct_randoms_in/4).
+:- lib(report/2).
 
 % :- ensure_loaded( chains_metrics_dbg ).  % testing only
 
