@@ -311,9 +311,13 @@ is a bibtex(Type,Key,Pairs) term of the same publication.
 Produces all related publications on backtracking.
 
 ?- bims_citation( A, G ), write( A ) nl.
+
 Distributional Logic Programming for Bayesian Knowledge Representation. 
+
 Nicos Angelopoulos and James Cussens. 
+
 International Journal of Approximate Reasoning (IJAR).
+
 Volume 80, January 2017, pages 52-66.
 
 */
