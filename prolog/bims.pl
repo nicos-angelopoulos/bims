@@ -303,13 +303,21 @@ Version Mj:Mn:Fx, and release date date(Y,M,D).
 % bims_version(   2:0:0, date(2017,2,21) ). % IJAR paper
 bims_version( 2:1:0, date(2017,3,10) ).     % pack(lib)
 
-%% bims_citation( -Atom, -Bibterm ).
-%
-% Succeeds once for each publication related to this library.
-% Atom is the atom representation suitable for printing while Bibterm 
-% is a bibtex(Type,Key,Pairs) term of the same publication. 
-% Produces all related publications on backtracking.
-%
+/** bims_citation( -Atom, -Bibterm ).
+
+Succeeds once for each publication related to this library.
+Atom is the atom representation suitable for printing while Bibterm 
+is a bibtex(Type,Key,Pairs) term of the same publication. 
+Produces all related publications on backtracking.
+
+?- bims_citation( A, G ), write( A ) nl.
+Distributional Logic Programming for Bayesian Knowledge Representation. 
+Nicos Angelopoulos and James Cussens. 
+International Journal of Approximate Reasoning (IJAR).
+Volume 80, January 2017, pages 52-66.
+
+*/
+
 bims_citation( Atom, bibtex(Type,Key,Pairs) ) :-
     Atom = 'Distributional Logic Programming for Bayesian Knowledge Representation. 
 Nicos Angelopoulos and James Cussens. 
