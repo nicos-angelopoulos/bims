@@ -1,6 +1,9 @@
 ---   Releases   ---
 --------------------
 
+2.2 @ 2017/04/18 - typos in Readme, remove .git from distro, changed licence.
+                 - added references to the BN likelihoods (README)
+                 - temporary links of the lib files
 2.1 @ 2017/03/10 - updated to work with pack(lib) v1.1
 2.0 @ 2016/11/29 - copied over a couple of linked files.
 	 @ 2016/11/11 - Two typos in bims/1 doc.

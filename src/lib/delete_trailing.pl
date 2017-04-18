@@ -1,1 +1,1 @@
-../../../../../lib/src/list/delete_trailing.pl
+/home/nicos/pl/lib/unclean/list/delete_trailing.pl

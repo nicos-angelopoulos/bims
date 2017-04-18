@@ -77,6 +77,16 @@ The dataset is a sampled dataset from the ASIA network and it comprises of 8 var
 ?- edit( pack(bims/data/bns) ).
 ==
 
+The default BN likelihood is an instance of the BDeu metric for scoring BN structures.
+
+W. L. Buntine. Theory refinement of Bayesian networks. In Bruce D’Ambrosio, Philippe
+Smets, and Piero Bonissone, editors, Proceedings of the Seventh Annual Conference on
+Uncertainty in Artificial Intelligence (UAI–1991), pages 52–60, 1991
+
+David Heckerman, Dan Geiger, and David M. Chickering. Learning Bayesian networks:
+The combination of knowledge and statistical data. Machine Learning, 20(3):197–243,
+1995.
+
 ---+++ Learning models from new datasets
 
 An easy way to run Bims on your data is to create a new directory and within 
@@ -93,16 +103,16 @@ For example,
 By defining a new likelihood function and new priors 
 the system can be used on new statistical models.
 
----+++ Pack info
+---++ Pack info
 
 @author Nicos Angelopoulos, http://stoics.org.uk/~nicos
 @author James Cussens (University of York), http://cs.york.ac.uk/~jc
 @version  2.0.0 2017/2/21
-@version  2.1.0 2017/3/10
+@version  2.2.0 2017/4/18
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
-@license  GPL 2 or Artistic 2.0
+@license MIT
 */
 
 bims_defaults( ArgsPrv, [    
@@ -297,11 +307,15 @@ bims_runs( R, I, Dgs, Mdl, Dlp, [Seed|Seeds], ResD, Goal, Opts ) :-
 Version Mj:Mn:Fx, and release date date(Y,M,D).
 
 @see doc/Releases.txt for more detail on change log
+@version 2:2:0
 
 */
-% bims_version( 1:0:0, date(2014,12,15) ).
-% bims_version(   2:0:0, date(2017,2,21) ). % IJAR paper
-bims_version( 2:1:0, date(2017,3,10) ).     % pack(lib)
+bims_version( 2:2:0, date(2017,4,18) ).
+
+% version( 1:0:0, date(2014,12,15) ).
+% version( 2:0:0, date(2017,2,21) ). % IJAR paper
+% version( 2:1:0, date(2017,2,21) ). % pack lib
+% version( 2:2:0, date(2017,2,21) ). % web-doc, de-git
 
 /** bims_citation( -Atom, -Bibterm ).
 

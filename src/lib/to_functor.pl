@@ -1,1 +1,1 @@
-../../../../../lib/src/term/to_functor.pl
+../../../../../lib/unclean/term/to_functor.pl

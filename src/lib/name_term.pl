@@ -1,1 +1,1 @@
-../../../../../lib/src/term/name_term.pl
+../../../../../lib/unclean/term/name_term.pl

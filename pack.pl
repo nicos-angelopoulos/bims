@@ -1,5 +1,5 @@
 name(bims).
-version('2.1').
+version('2.2').
 title('Bayesian inference of model structure.').
 keywords([statistics,'machine learning','Bayesian Inference','MCMC','Metropolis Hastings']).
 author( 'Nicos Angelopoulos', 'http://stoics.org.uk/~nicos' ).
