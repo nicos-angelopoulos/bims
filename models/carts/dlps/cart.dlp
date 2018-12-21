@@ -12,7 +12,7 @@
      */
 
 :- ensure_loaded( library(lists) ).          % memberchk/2.
-:- ensure_loaded( aux/ord_int_intersection ).    % /4.
+:- ensure_loaded( 'aux/ord_int_intersection' ).    % /4.
 
 :- compile( 'pselect.dlp' ).                 % /3.
 :- compile( 'psplit.dlp' ).                  % /4.

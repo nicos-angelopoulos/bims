@@ -1,6 +1,7 @@
 ---   Releases   ---
 --------------------
 
+2.3 @ 2018/12/21 - wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
 2.2 @ 2017/04/18 - typos in Readme, remove .git from distro, changed licence.
                  - added references to the BN likelihoods (README)
                  - temporary links of the lib files
