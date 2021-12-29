@@ -2,9 +2,10 @@
 --------------------
 
 2.4 
-    @ 2021/12/29 DEPS:    started dependency to stoics_lib
+    @ 2021/12/29 DEPS:    started dependency to pack(stoics_lib)
                  CHANGED: head_to_spec/2 -> goal_spec/2
                  CHANGED: to_list/2 -> en_list/2
+                 DELINK:  src/lib/option_in_values_or_else_default.pl (/6)
 
 2.3 @ 2018/12/21 - wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
 
