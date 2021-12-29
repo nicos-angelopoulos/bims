@@ -1,11 +1,12 @@
 ---   Releases   ---
 --------------------
 
-2.4 
+2.4 DELINK:  option_in_values_or_else_default.pl, werr.pl, is_letter.pl, if.pl
     @ 2021/12/29 DEPS:    started dependency to pack(stoics_lib)
                  CHANGED: head_to_spec/2 -> goal_spec/2
                  CHANGED: to_list/2 -> en_list/2
                  DELINK:  option_in_values_or_else_default.pl, werr.pl, is_letter.pl, if.pl
+                 DELINK:  on_random.pl, rev_append.pl, n_distinct_randoms_in.pl, write_list_with_line_numbers.pl
 
 2.3 @ 2018/12/21 - wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
 

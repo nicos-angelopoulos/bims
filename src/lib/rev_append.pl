@@ -1,1 +1,3 @@
-../../../../../lib/unclean/list/rev_append.pl
+rev_append( [], Tail, Tail ).
+rev_append( [H|T], App, All ) :-
+	rev_append( T, [H|App], All ).
