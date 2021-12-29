@@ -106,8 +106,11 @@ the system can be used on new statistical models.
 
 @author Nicos Angelopoulos, http://stoics.org.uk/~nicos
 @author James Cussens (University of York), http://cs.york.ac.uk/~jc
-@version  2.0.0 2017/2/21
-@version  2.2.0 2017/4/18
+@version  2.0 2017/02/21, IJAR paper
+@version  2.1 2017/03/10, pack lib
+@version  2.2 2017/04/18, web-doc; de-git
+@version  2.3 2018/12/21, aux/ -> aux_code
+@version  2.4,2021/12/29, run on SWI 8.5.4; github core complete
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
@@ -305,16 +308,17 @@ bims_runs( R, I, Dgs, Mdl, Dlp, [Seed|Seeds], ResD, Goal, Opts ) :-
 
 Version Mj:Mn:Fx, and release date date(Y,M,D).
 
+==
+?- bims_version(Vers, Date).
+Vers = 2:4:0,
+Date = date(2021, 12, 29).
+==
+
 @see doc/Releases.txt for more detail on change log
-@version 2:2:0
+@version 2:4:0
 
 */
-bims_version( 2:2:0, date(2017,4,18) ).
-
-% version( 1:0:0, date(2014,12,15) ).
-% version( 2:0:0, date(2017,2,21) ). % IJAR paper
-% version( 2:1:0, date(2017,2,21) ). % pack lib
-% version( 2:2:0, date(2017,2,21) ). % web-doc, de-git
+bims_version( 2:4:0, date(2021,12,29) ).
 
 /** bims_citation( -Atom, -Bibterm ).
 

@@ -20,13 +20,13 @@
                  - temporary links of the lib files
 2.1 @ 2017/03/10 - updated to work with pack(lib) v1.1
 2.0 @ 2016/11/29 - copied over a couple of linked files.
-	 @ 2016/11/11 - Two typos in bims/1 doc.
-	 @ 2016/11/04 - Added citations and version pred to interface.
+    @ 2016/11/11 - Two typos in bims/1 doc.
+    @ 2016/11/04 - Added citations and version pred to interface.
     @ 2016/11/04 - Changes to expaneniated the log-likehood to get the ratio
-	                it now first tests for >0 in which case we don't need
-						 to run exp(). This should make things faster and avoids
-						 overflow errors. Done in main carts and bn 
-						 lhood_canonical/5.
+                     it now first tests for >0 in which case we don't need
+                               to run exp(). This should make things faster and avoids
+                               overflow errors. Done in main carts and bn 
+                               lhood_canonical/5.
     @ 2016/11/04 - Minor module doc fixes.
 
 1.1
