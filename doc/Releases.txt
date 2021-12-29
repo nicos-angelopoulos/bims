@@ -7,6 +7,7 @@
                  CHANGED: to_list/2 -> en_list/2
                  DELINK:  option_in_values_or_else_default.pl, werr.pl, is_letter.pl, if.pl
                  DELINK:  on_random.pl, rev_append.pl, n_distinct_randoms_in.pl, write_list_with_line_numbers.pl
+                 DELINK:  is_list_of_n_vars.pl, open_mode.pl, write_terms.pl, remove_template_duplicates.pl
 
 2.3 @ 2018/12/21 - wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
 
