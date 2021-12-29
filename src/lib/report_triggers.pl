@@ -1,33 +1,35 @@
+:- lib(stoics_lib:en_list/2).
+
 %% report_triggers( +These ).
 %
 %  Set up print hooks for items of These. Can be a non-listed singleton.
 %
 report_triggers( Those ) :-
-	to_list( Those, AllOfThese ),
-	sort( AllOfThese, These ),
-	retractall( bims_report:report(_) ),
-	report_triggers_assert( These ).
+     en_list( Those, AllOfThese ),
+     sort( AllOfThese, These ),
+     retractall( bims_report:report(_) ),
+     report_triggers_assert( These ).
 
 report_triggers_assert( These ) :-
-	memberchk( all, These ),
-	!,
-	report_triggers_assert_all.
+     memberchk( all, These ),
+     !,
+     report_triggers_assert_all.
 report_triggers_assert( These ) :-
-	findall( _, ( member(This,These),known_printable(This),
-	              assert( bims_report:report(This) )
-	            ), _ ).
+     findall( _, ( member(This,These),known_printable(This),
+                   assert( bims_report:report(This) )
+                 ), _ ).
 
 report_triggers_assert_all :-
-	known_reportable_term( This, _, _ ),
-	assert( bims_report:report(This) ),
-	fail.
+     known_reportable_term( This, _, _ ),
+     assert( bims_report:report(This) ),
+     fail.
 report_triggers_assert_all.
 
 known_reportable( This ) :-
-	known_reportable_term( This, _Ari, _Excpl ),
-	!.
+     known_reportable_term( This, _Ari, _Excpl ),
+     !.
 known_reportable( This ) :-
-	throw( fixme(ignoring_unknown_printable_with_list_of_possibles(This)) ).
+     throw( fixme(ignoring_unknown_printable_with_list_of_possibles(This)) ).
 
 % fixme: add public predicate for interrogating this
 known_reportable_term( b_pos, 2, 'Backtrack positions sop/2' ). 

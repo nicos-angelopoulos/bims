@@ -1,24 +1,25 @@
 
-:- use_module( library(date) ).
-:- ensure_loaded( library(apply) ).
+:- use_module(library(date)).
+:- ensure_loaded(library(apply)).
+
 :- lib(get_date_time/1).
 :- lib(break_nth/4).
-:- lib(to_list/2).
+:- lib(stoics_lib:en_list/2).
 
 os_unique_by_date_test :-
-	use_module( library(socket) ),  
+     use_module( library(socket) ),  
      gethostname( Host ),
      ( os_unique_by_date( [res,Host], Bname, [] )
-	  ; os_unique_by_date( [res,Host], Bname, [min_length(da,3)] )
-	  ; os_unique_by_date( [res,Host], Bname, [max_length(ya,3)] )
-	),
+       ; os_unique_by_date( [res,Host], Bname, [min_length(da,3)] )
+       ; os_unique_by_date( [res,Host], Bname, [max_length(ya,3)] )
+     ),
      write( b_name(Bname) ), nl.
 
 /*
 os_unique_by_date_test( two ) :-
      gethostname( Host ), % SWI specific? check Yap
      write( b_name(Bname) ), nl.
-	*/
+     */
 
 %% os_unique_by_date( +Token, -OsEntry ).
 %% os_unique_by_date( +Token, -OsEntry, +Opts ).
@@ -84,7 +85,7 @@ os_unique_by_date_test( two ) :-
 os_unique_by_date( Tkn, Bname ) :-
     os_unique_by_date( Tkn, Bname, [] ).
 os_unique_by_date( Tkn, Bname, ArgS ) :-
-    to_list( ArgS, Args ),
+    en_list( ArgS, Args ),
     % options_append( os_unique_by_date, InOpts, Opts ),
     % os_unique_by_date_defaults( Defs ) :- 
     Defs = [ date_sep('.'),token_sep('-'),by([ye,mo,da,[ho,mi],[se]]),place_token(before),
@@ -102,14 +103,14 @@ construct_unique_base_name_by_date( By, Tkn, All, Bname ) :-
      findall_date_components( ByAtoms, Lengths, Dcomps ),
      memberchk( type(Type), All ),
      memberchk( ext(Ext), All ),
-	memberchk( date_sep(DSep), All ),
+     memberchk( date_sep(DSep), All ),
      atomic_list_concat( Dcomps, DSep, DateBit ),
-	to_list( Tkn, Tkns ), 
-	memberchk( token_sep(TSep), All ),
-	atomic_list_concat( Tkns, TSep, TknConc ),
-	memberchk( place_token(PlcTkn), All ),
-	place_token_sep_date_concat( PlcTkn, TknConc, TSep, DateBit, CurrStem ),
-	type_ext_full( Type, Ext, CurrStem, Current ),
+     en_list( Tkn, Tkns ), 
+     memberchk( token_sep(TSep), All ),
+     atomic_list_concat( Tkns, TSep, TknConc ),
+     memberchk( place_token(PlcTkn), All ),
+     place_token_sep_date_concat( PlcTkn, TknConc, TSep, DateBit, CurrStem ),
+     type_ext_full( Type, Ext, CurrStem, Current ),
      keep_to_unique_base_name_by_date( Current, ByLists, Lengths, PlcTkn, TSep, DSep, Type, Ext, Bname ),
      ( Type == file ->
           open( Bname, write, Out ), close( Out )
@@ -120,7 +121,7 @@ construct_unique_base_name_by_date( By, Tkn, All, Bname ) :-
 
 type_ext_full( dir, _Ext, Current, Current ).
 type_ext_full( file, Ext, Current, Full ) :-
-	file_name_extension( Current, Ext, Full ).
+     file_name_extension( Current, Ext, Full ).
 
 findall_date_components( ByAtoms, Lens, Dcomps ) :-
      get_date_time( Datime ),
@@ -134,21 +135,21 @@ findall_date_components( ByAtoms, Lens, Dcomps ) :-
                          Dcomps ).
 
 place_token_sep_date_concat( before, Tkn, Sep, Date, Conc ) :-
-	atomic_list_concat( [Tkn,Date], Sep, Conc ).
+     atomic_list_concat( [Tkn,Date], Sep, Conc ).
 place_token_sep_date_concat( after, Tkn, Sep, Date, Conc ) :-
-	atomic_list_concat( [Date,Tkn], Sep, Conc ).
+     atomic_list_concat( [Date,Tkn], Sep, Conc ).
 
 keep_to_unique_base_name_by_date( Current, _ByLists, _Lengths, _Plc, _TSep, _DSep, _Type, _Ext, Bname ) :-
-	% fixme:
+     % fixme:
      \+ exists_file( Current ),
      \+ exists_directory( Current ),
      !,
      Bname = Current.
 keep_to_unique_base_name_by_date( Full, [H|T], Lengths, Plc, TSep, DSep, Type, Ext, Bname ) :-
      findall_date_components( H, Lengths, Dcomps ),
-	type_ext_full( Type, Ext, Current, Full ),
-	place_stem_date_fragment( Plc, Current, TSep, DSep, Dcomps, Next ),
-	type_ext_full( Type, Ext, Next, NextFull ),
+     type_ext_full( Type, Ext, Current, Full ),
+     place_stem_date_fragment( Plc, Current, TSep, DSep, Dcomps, Next ),
+     type_ext_full( Type, Ext, Next, NextFull ),
      % atomic_list_concat( [Current|Dcomps], IdSep, Next ),
      % we could introduce another separator here.
      keep_to_unique_base_name_by_date( NextFull, T, Lengths, Plc, TSep, DSep, Type, Ext, Bname ).
@@ -156,9 +157,9 @@ keep_to_unique_base_name_by_date( Full, [H|T], Lengths, Plc, TSep, DSep, Type, E
 place_stem_date_fragment( before, SoFar, _TSep, DSep, Dcomps, Next ) :-
      atomic_list_concat( [SoFar|Dcomps], DSep, Next ).
 place_stem_date_fragment( after, SoFar, TSep, DSep, Dcomps, Next ) :-
-	atomic_list_concat( [Dsofar|Rem], TSep, SoFar ),
+     atomic_list_concat( [Dsofar|Rem], TSep, SoFar ),
      atomic_list_concat( [Dsofar|Dcomps], DSep, Dnext ),
-	atomic_list_concat( [Dnext|Rem], TSep, Next ).
+     atomic_list_concat( [Dnext|Rem], TSep, Next ).
 
 procruste( Key, Int, Lens, Dcomp ) :-
      number_codes( Int, IntCs ),

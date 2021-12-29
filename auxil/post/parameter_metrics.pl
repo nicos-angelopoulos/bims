@@ -1,8 +1,8 @@
 
 % :- requires( options_append/3 ).
 % :- requires( options/2 ).
-:- requires( to_list/2 ).
-:- requires( atom_sub/2 ).
+:- lib(stoics_lib:en_list/2).
+:- lib(atom_sub/2).
 
 parameter_metrics_defaults( Args, Defs ) :-
 	Defs = [ 
@@ -13,7 +13,7 @@ parameter_metrics_defaults( Args, Defs ) :-
 	],
 	% (memberchk(metrics(M),Args) -> true; M is 1),
 	( memberchk(parameter_names(PnmS),Args) ->
-		to_list(PnmS,Pnms), length(Pnms,P)
+		en_list(PnmS,Pnms), length(Pnms,P)
 		;
 		P is 1
 	),
@@ -43,7 +43,7 @@ Opts
 */
 parameter_metrics( Pname, Rname, PMprs, Args ) :-
 	Self = parameter_metrics,
-    to_list( ArgS, Args ),
+    en_list( ArgS, Args ),
     parameter_metrics_defaults( Args, Defs ),
     append( Args, Defs, Opts ),
 	% options_append( Self, Args, Opts ),
@@ -55,7 +55,7 @@ parameter_metrics( Pname, Rname, PMprs, Args ) :-
     memberchk( numeric(Nmc), Opts ),
     memberchk( metrics(NofMs), Opts ),
 	memberchk( positions(PosS), Opts ),
-	to_list( PosS, Poss ),
+	en_list( PosS, Poss ),
 	maplist( parameter_metrics_dir(Pfx,Poss,Sep,Nmc,NofMs,Pname,Rname), Prefixed, PMprs ),
 	maplist( writeln, PMprs ),
 	working_directory( _, Old ).
@@ -86,7 +86,7 @@ parameter_metrics_file( Dir, Pname, NofMs, Rname, File, Mtrcs ) :-
 parameter_metrics_sub_directory( Opts, Dir, Old ) :-
 	options( prefix(Pfx), Opts ),
 	options( separator(Sep), Opts ),
-	to_list( Pfx, Pfxs ),
+	en_list( Pfx, Pfxs ),
 	at_con( Pfxs, Sep, Dir ),
 	parameter_metrics_existing_directory( Dir, Old ).
 

@@ -2,34 +2,32 @@
 
 % :- set_prolog_flag( verbose_load, true ).
 
-:- ensure_loaded( '../src/init_lib' ).
+:- ensure_loaded('../src/init_lib').
 
 % :- ensure_loaded( library(on_pl) ). 		% pl/2.
                                              % library(pl) is not accepted in Yap!?
-:- ensure_loaded( library(lists) ).     % is_list/1.
-:- ensure_loaded( library(random) ).
+:- ensure_loaded(library(lists)).     % is_list/1.
+:- ensure_loaded(library(random)).
 
 :- pl( yap(_Y), set_prolog_flag(update_semantics,logical) ).
 :- pl( yap(_Y), set_prolog_flag(unknown,error) ).
 :- pl( yap(_Y), set_prolog_flag(single_var_warnings,on) ).
 
-:- ensure_loaded( all_dynamic ).
-:- ensure_loaded( ad_to_slp ).
-:- ensure_loaded( kernel ).
-:- ensure_loaded( version ).
+:- ensure_loaded(all_dynamic).
+:- ensure_loaded(ad_to_slp).
+:- ensure_loaded(kernel).
+:- ensure_loaded(version).
 % :- ensure_loaded( model_type_calls ).
-% HERE 2015
 
+% :- lib(stoics_lib:en_list/2).
 :- lib(lss/0).
 :- lib(copy_stream_on_stream/2).
 :- lib(dbg/2).				    %
 :- lib(werr/2 ).				% /1.
 :- lib(error_to_output/2).
-:- lib(head_to_spec/2).        % fixme: remove this
 :- lib(esr/1).
 :- lib(mcmcms_top_dir/1).		% bb_puts it.
 :- lib(is_list_of_n_vars/2).
-:- lib(to_list/2).
 :- lib(unique_filename/3).
 :- lib(is_letter/1).
 :- lib(assert_unique/1).
@@ -232,7 +230,7 @@ main_statistics( Sum, Stats ) :-
 
 
 load_data_and_put_dgoal( D ) :-
-	head_to_spec( D, SpecD ),
+	goal_spec( D, SpecD ),
 	( current_predicate(user:SpecD) -> 
 		( call( user:D ) ->
 			true
@@ -275,7 +273,7 @@ load_data_and_put_dgoal( D ) :-
 	*/
 
 pc( Stream, Clause ) :-
-     to_list( Clause, Clauses ),
+     en_list( Clause, Clauses ),
      pc_1( Clauses, Stream ).
 
 pc_1( [], _Stream ).

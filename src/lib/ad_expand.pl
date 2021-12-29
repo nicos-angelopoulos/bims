@@ -4,9 +4,8 @@
 % :- op( 1100, xfy, ^ ).
 
 :- use_module( library(lists) ).		% nth/3.
-:- lib(head_to_spec/2).
 :- lib(ord_only_add_elem/3).
-:- lib(to_list/2).
+:- lib(stoics_lib:en_list/2).
 
 :- dynamic user:term_expansion/2.
 :- dynamic ad:s_label/2.
@@ -69,7 +68,7 @@ bims:term_expansion( Term, Expant ) :-
 	),
 	( InH = (InL::Head) -> 
 		( InL = (LEx::InLVs) ->
-			bims:to_list( InLVs, LVs ),
+			bims:en_list( InLVs, LVs ),
 			Stochastic = d
 			;
 			Label is InL,
@@ -104,7 +103,7 @@ bims:term_expansion( Term, Expant ) :-
 		OutBody = true
 	),
 	TmpClause = (Head:-OutBody),
-	bims:head_to_spec( Head, Spec ),
+	bims:goal_spec( Head, Spec ),
 	% pl( sicstus(_S), Expant = [(:- dynamic(Mod:Spec)),Mod:OutClause] ),
 	% pl( yap(_Y), (Expant = Mod:OutClause) ),
 	Expant = tmp:TmpClause, % only for catching syntax errors/warnings.

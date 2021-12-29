@@ -1,8 +1,8 @@
 
 :- ensure_loaded( parameter_metrics ).
 
-:- requires( csv_df/2 ).
-:- requires( to_list/2 ).
+:- lib(csv_df/2).
+:- lib(stoics_lib:en_list/2).
 
 :- use_module( library(real) ).
 :- 
@@ -29,7 +29,7 @@ parameter_metric_plot_defaults( Args, Defs ) :-
 
 
 parameter_metrics_plots( ChPred, RedPred, ArgS ) :-
-    to_list( ArgS, Args ),
+    en_list( ArgS, Args ),
     parameter_metrics_plots_defaults( Defs ),
     append( Args, Defs, Opts ),
 	% options_append( parameter_metrics_plots, Args, Opts ),
@@ -47,7 +47,7 @@ parameter_metrics_plots( ChPred, RedPred, ArgS ) :-
 %
 parameter_metric_plot( Pnames, PMprs, Mnames, ArgS, Mname ) :-
 	% options_append( parameter_metric_plot, [Mname|Args], Opts ),
-    to_list( ArgS, Args ),
+    en_list( ArgS, Args ),
     parameter_metric_plot_defaults( Args, Defs ),
     append( Args, Defs, Opts ),
 	debug( _, 'Ploting metric: ~w', Mname ),
@@ -90,7 +90,7 @@ parameter_metric_plot( Pnames, PMprs, Mnames, ArgS, Mname ) :-
 	<- print( pmp_dfs ),
 
 	memberchk( exts(ExtS), Opts ),
-	to_list( ExtS, Exts ),
+	en_list( ExtS, Exts ),
 	maplist( gg_save_stem_ext(Mname), Exts ).
 
 gg_save_stem_ext( Mname, Ext ) :-

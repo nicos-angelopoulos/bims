@@ -1,8 +1,8 @@
 
 :- ensure_loaded( library(lists) ).     % append/3, member/2, flatten/2.
-:- ensure_loaded( library(system) ).	% file_exists/1.
+:- ensure_loaded( library(system) ).    % file_exists/1.
 
-:- lib(to_list/2).
+:- lib(stoics_lib:en_list/2).
 :- lib(break_nth/4).
 :- lib(file_exists/1).
 :- lib(break_list_on_list/4).
@@ -44,21 +44,21 @@ testo_touch( File ) :-
 testo_clean :- shell( 'rm abc__test*' ).
 
 safe_unique_filename( Stream, Stream ) :-
-	is_a_stream( Stream ), !.
+     is_a_stream( Stream ), !.
 safe_unique_filename( FileAtom, UniqueFile ) :-
-	unique_filename( FileAtom, UniqueFile ).
+     unique_filename( FileAtom, UniqueFile ).
 
 unique_filename_defaults( Defs, RepVals ) :-
      Defs = [  version(v),
                separator('_'),
                % add(Call,Lgt),          no default adds
                report(true),
-			type(file),			% else dir
+               type(file),              % else dir
                extension(null__)],  % not '' ?
      RepVals = [true,false].
 
 unique_filename( FileAtom, UniqueFile ) :-
-	unique_filename( FileAtom, UniqueFile, [] ).
+     unique_filename( FileAtom, UniqueFile, [] ).
 
 % Opt in {report([true,false]),version(AtomicVrs),extension(Ext)}
 % I guess we can ask for type([integer,upper,lower,letter]),
@@ -66,7 +66,7 @@ unique_filename( FileAtom, UniqueFile ) :-
 %
 unique_filename( FileIn, UnqFile, OptsIn ) :-
      unique_filename_defaults( Defs, RepVls ),
-	to_list( OptsIn, Opts ),
+     en_list( OptsIn, Opts ),
      append( Opts, Defs, All ),
      memberchk( version(VrsIn), All ),
      to_codes( VrsIn, VrsPfx ),
@@ -79,61 +79,61 @@ unique_filename( FileIn, UnqFile, OptsIn ) :-
      findall( add(Add,Lgt), member(add(Add,Lgt),Opts), Additions ),
      atom_codes( Stem, StemCs ),
      uf_unique_additions( Additions, Sep, StemCs, UnqStemCs ),
-	atom_codes( UnqStem, UnqStemCs ),
+     atom_codes( UnqStem, UnqStemCs ),
      % has_extension( Test, UnqStem, Ext ),
      file_name_extension( UnqStem, Ext, Test ),
-	( type_exists(Test,All) ->
+     ( type_exists(Test,All) ->
           append( Sep, VrsPfx, Vrs ),
-		append( UnqStemCs, Vrs, VrsRnmCs ),
-		append( VrsRnmCs, [0'0,0'1], FirstRnmCs ),
-		atom_codes( First, FirstRnmCs ),
-		uf_ex_err( Rep, Test, First ),
-		unique_filename_1( First, Ext, Vrs, Rep, UnqFile, Opts )
-		;
-		UnqFile = Test
-	),
-	!.
+          append( UnqStemCs, Vrs, VrsRnmCs ),
+          append( VrsRnmCs, [0'0,0'1], FirstRnmCs ),
+          atom_codes( First, FirstRnmCs ),
+          uf_ex_err( Rep, Test, First ),
+          unique_filename_1( First, Ext, Vrs, Rep, UnqFile, Opts )
+          ;
+          UnqFile = Test
+     ),
+     !.
 
 unique_filename_1( Stem, Ext, Vrs, Rep, UnqFile, Opts ) :-
      % has_extension( File, Stem, Ext ),
-	file_name_extension( Stem, Ext, File ),
+     file_name_extension( Stem, Ext, File ),
      type_exists( File, Opts ),
      !,
      atom_codes( Stem, StemCs ),
      next_filename( StemCs, Vrs, NextStemCs ),
      atom_codes( NextStem, NextStemCs ),
-	uf_ex_err( Rep, File, NextStem ),
+     uf_ex_err( Rep, File, NextStem ),
      unique_filename_1( NextStem, Ext, Vrs, Rep, UnqFile, Opts ).
 unique_filename_1( Stem, Ext, _Vrs, _Rep, File, _Opts ) :-
-	file_name_extension( Stem, Ext, File ).
+     file_name_extension( Stem, Ext, File ).
      % has_extension( File, Stem, Ext ).
 
 type_exists( File, Opts ) :-
-	memberchk( type(Type), Opts ),
-	type_exists_1( Type, File ).
+     memberchk( type(Type), Opts ),
+     type_exists_1( Type, File ).
 
 type_exists_1( file, File ) :-
-	exists_file( File ).
+     exists_file( File ).
 type_exists_1( dir, Dir ) :-
-	exists_directory( Dir ).
+     exists_directory( Dir ).
 
 uf_ex_err( true, Exists, New ) :-
-	write( user_error,
-		file_name_change_due_to_existance(Exists, New) ),
-	nl( user_error ).
+     write( user_error,
+          file_name_change_due_to_existance(Exists, New) ),
+     nl( user_error ).
 uf_ex_err( false, _Exists, _New ).
 
 next_filename( CharListIn, Vrs, CharListOu_T ) :-
-	append( Proper, "/", CharListIn ),
+     append( Proper, "/", CharListIn ),
      !,
-	next_filename( Proper, Vrs, CharListOut1 ),
-	append( CharListOut1, "/", CharListOu_T ).
+     next_filename( Proper, Vrs, CharListOut1 ),
+     append( CharListOut1, "/", CharListOu_T ).
 next_filename( Stem, Vrs, NxtStem ) :-
      % i dont think this necessary any longer
      % ( (break_list_on_list( CharListIn, ".", Main, Vrss ),
-        	%    \+ member( 0'/, Vrss ) ) ->
+          %    \+ member( 0'/, Vrss ) ) ->
           %    append( ".", Vrss, DotVrss )
-	     %    ; 
+          %    ; 
           %    ( append( Main, "/", CharListIn ) ->
           %     DotVrss = "/"
           %     ;
@@ -213,10 +213,10 @@ file_and_extension( FileIn, ExtOpt, Stem, Ext ) :-
      ).
 
 to_codes( Atom, Codes ) :-
-	atom( Atom ),
-	!,
-	atom_codes( Atom, Codes ).
+     atom( Atom ),
+     !,
+     atom_codes( Atom, Codes ).
 to_codes( Number, Codes ) :-
-	number( Number ),
-	!,
-	number_codes( Number, Codes ).
+     number( Number ),
+     !,
+     number_codes( Number, Codes ).

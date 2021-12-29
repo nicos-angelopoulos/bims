@@ -7,8 +7,8 @@
 :- ensure_loaded( library(system) ).      % /rename_file/2, tmp_file/2.
 
 % :- ensure_loaded( library(cc) ).        % init_cc/0, next_cc/1, bims_bb_get(cc).
+:- lib(stoics_lib:en_list/2).
 :- lib(cc/0).                      % init_cc/0, next_cc/1, bims_bb_get(cc).
-:- lib(head_to_spec/2).
 :- lib(unique_filename/2).
 :- lib(kv_decompose/3).
 :- lib(defined_elsewhere/2).
@@ -17,13 +17,12 @@
 :- lib(werr/1).
 :- lib(flatten_vs/2).
 :- lib(is_letter/1).
-% :- pl( swi(_), true, requires(to_list/2) ).
 
-:- multifile( last_skips/2 ).
-:- dynamic( last_skips/2 ).
+:- multifile(last_skips/2).
+:- dynamic(last_skips/2).
 
-:- dynamic( bims_stailr:stailr/1 ).
-:- dynamic( bims_stailr:lv_no_bpoint/1 ). % user defined, leaves no backtrack point.
+:- dynamic(bims_stailr:stailr/1).
+:- dynamic(bims_stailr:lv_no_bpoint/1). % user defined, leaves no backtrack point.
 
 errhandle(Err)  :- 
 	write( errhandle(Err) ), nl.
@@ -248,7 +247,7 @@ expand_body_calls( (PVrs ## A), Pathin/Ld, ExpCmpl ) :-
 	% ExpCmpl = ( Pathin = [NestIn|Ld], Pathout = [NestOut|Lp], ExpA ),
 	( is_distributional( A ) -> 
 		A =.. [Pred|Args],
-		to_list( PVrs, PrbVrs ),
+		en_list( PVrs, PrbVrs ),
 		ExtA =.. [Pred,PrbVrs|Args]
 		;
 		write( user_error, 'inappropriate use of ## within body goal' ),
@@ -319,7 +318,7 @@ spec_of_type( Spec, Type ) :-
 	!.
 
 is_stochastic_or_ext_distributional( A ) :-
-	head_to_spec( A, Spec ), 
+	goal_spec( A, Spec ), 
 	( spec_of_type( Spec, s ) -> 
 		true 
 		; 
@@ -330,13 +329,13 @@ is_stochastic_or_ext_distributional( A ) :-
 	!.
 
 is_stochastic( Head ) :-
-	head_to_spec( Head, Spec ),
+	goal_spec( Head, Spec ),
 	spec_of_type(Spec, s).
 is_distributional( Head ) :-
-	head_to_spec( Head, Spec ),
+	goal_spec( Head, Spec ),
 	spec_of_type(Spec, d).
 is_non_stochastic( Head ) :-
-	head_to_spec( Head, Spec ),
+	goal_spec( Head, Spec ),
 	spec_of_type(Spec, ns).
 % make the following flag the presence of s_random,
 % so code only need to be added to the transformed slp if some body included this.
@@ -430,7 +429,7 @@ de_module_body( (Mod::InA), _Vs, A ) :- !,
 		;
 		( is_distributional( InA ) -> 
 			InA =.. [Pred|Args],
-			to_list( Mod, ModList ),
+			en_list( Mod, ModList ),
 			A =.. [Pred,ModList|Args]
 			;
 			write( user_error, ':: used for non distributional goal' ),

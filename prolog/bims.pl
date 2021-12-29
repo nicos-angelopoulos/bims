@@ -3,7 +3,8 @@
 :- use_module( library(lib) ).
 % :- ensure_loaded( '../src/mcmcms' ).
 % :- ensure_loaded( '../src/init_lib' ).
-:- lib( source(bims), homonyms(true) ).
+:- lib(source(bims), homonyms(true)).
+:- lib(stoics_lib).  % en_list/2, goal_spec/2.
 
 :- lib(mcmcms/12).
 :- lib(os_unique_by_date/2).
@@ -14,9 +15,7 @@
 :- lib(bims_bb_remove/2).
 :- lib(remove_template_duplicates/2).
 :- lib(get_date_time/1).
-:- lib(head_to_spec/2).
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
-:- lib(to_list/2).
 
 :- lib(end(bims)).
 % :- lib_pack_end( bims ).
@@ -132,7 +131,7 @@ bims_defaults( ArgsPrv, [
                 top_goal(ModelSingular),
                 debug(true)
         ] ) :-
-               to_list( ArgsPrv, Args ),
+               en_list( ArgsPrv, Args ),
                ( (memberchk(results_dir(ArgsDir),Args),ground(ArgsDir)) ->
                     make_directory(ArgsDir)
                     ;
@@ -243,7 +242,7 @@ The predicate generates one results directory (Rdir) and files recording informa
 bims :- bims( [] ).
 
 bims( ArgsPrv ) :-
-    to_list( ArgsPrv, Args ),
+    en_list( ArgsPrv, Args ),
     bims_defaults( Args, Defs ),
     append( Args, Defs, Opts ),
     debug( bims, 'Bims options: ~w', [Opts] ),
@@ -412,7 +411,7 @@ bims_lib( Spec ) :-
 bims_option_seeds( Opts, Seeds ) :-
     memberchk( chains(Runs), Opts ),
     memberchk( seeds(PrvSeedS), Opts ),
-    to_list( PrvSeedS, PrvSeeds ),
+    en_list( PrvSeedS, PrvSeeds ),
     length( PrvSeeds, PrvLen ),
     Diff is max( Runs - PrvLen, 0 ),
     last( PrvSeeds, Last ),
