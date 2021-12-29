@@ -59,6 +59,7 @@ bims:term_expansion( Term, Expant ) :-
 	% write( user_error, term(Term) ), nl( user_error ),
 	\+ bims:bims_bb_get( no_slp_expansions, true ),
 	Term \== end_of_file,
+	Term \== begin_of_file,
 	Term \= (?-_An1),
 	Term \= (:-_An2),
 	( Term = (InH :- Body) ->
