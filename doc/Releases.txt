@@ -1,14 +1,17 @@
 ---   Releases   ---
 --------------------
 
-2.4 DELINK:  option_in_values_or_else_default.pl, werr.pl, is_letter.pl, if.pl
+2.4              @ 2021/12/29
     @ 2021/12/29 DEPS:    started dependency to pack(stoics_lib)
                  CHANGED: head_to_spec/2 -> goal_spec/2
                  CHANGED: to_list/2 -> en_list/2
                  DELINK:  option_in_values_or_else_default.pl,werr.pl,is_letter.pl,if.pl,ord_only_add_elem.pl
                  DELINK:  on_random.pl,rev_append.pl,n_distinct_randoms_in.pl,write_list_with_line_numbers.pl
                  DELINK:  is_list_of_n_vars.pl,open_mode.pl,write_terms.pl,remove_template_duplicates.pl
+                 DELINK:  to_list.pl
                  FIXED:   add begin_of_file to the terms that are not dlp interpreted
+                 FIXED:   ref to dir in cart.dlp from aux to aux_code.
+                 CHANGED: ensure_loaded(aux_code/ord_int_intersection) to compile()
 
 2.3 @ 2018/12/21 - wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
 

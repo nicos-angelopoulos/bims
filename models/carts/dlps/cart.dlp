@@ -12,47 +12,47 @@
      */
 
 :- ensure_loaded( library(lists) ).          % memberchk/2.
-:- ensure_loaded( 'aux/ord_int_intersection' ).    % /4.
 
-:- compile( 'pselect.dlp' ).                 % /3.
-:- compile( 'psplit.dlp' ).                  % /4.
+:- compile('aux_code/ord_int_intersection'). % /4.
+:- compile('pselect.dlp').                   % /3.
+:- compile('psplit.dlp').                    % /4.
 
 cart( Cart ) :-
-	cart( 0.95/1, Cart ).
+     cart( 0.95/1, Cart ).
 
 cart( Prms, Cart ) :-
-	once( data:splits(Splits) ),
-	once( data:ids(Ids,IdsLen) ),
-	once( data:vacuous(Vac) ),
-	cart( Splits, ids(Ids,IdsLen), Vac, Prms, Cart ).
-	
+     once( data:splits(Splits) ),
+     once( data:ids(Ids,IdsLen) ),
+     once( data:vacuous(Vac) ),
+     cart( Splits, ids(Ids,IdsLen), Vac, Prms, Cart ).
+     
 cart( Splits, Ids, Lim, Alpha/Beta, Cart ) :-
-	[Alpha] :: split_leaf( 0, Splits, Ids, Lim, Alpha/Beta, Cart ).
+     [Alpha] :: split_leaf( 0, Splits, Ids, Lim, Alpha/Beta, Cart ).
 
 Split :: Split :: split_leaf( D, Splits, Ids, Lim, Alpha/Beta, Cart ) :-
-	Cart = cart( F, Fspoint, NwL, NwR ),
-	D1 is D + 1,
-	NwSplit is Alpha * ((1+D1) ** (-Beta)),
-	% NwSplit is Alpha * exp((1+D1),-Beta),
-	split_choice( Splits, Ids, Lim, F, Fspoint, LIds, RIds, LSplits, RSplits ),
-	[NwSplit] ## split_leaf( D1, LSplits, LIds, Lim, Alpha/Beta, NwL ),
-	[NwSplit] ## split_leaf( D1, RSplits, RIds, Lim, Alpha/Beta, NwR ).
+     Cart = cart( F, Fspoint, NwL, NwR ),
+     D1 is D + 1,
+     NwSplit is Alpha * ((1+D1) ** (-Beta)),
+     % NwSplit is Alpha * exp((1+D1),-Beta),
+     split_choice( Splits, Ids, Lim, F, Fspoint, LIds, RIds, LSplits, RSplits ),
+     [NwSplit] ## split_leaf( D1, LSplits, LIds, Lim, Alpha/Beta, NwL ),
+     [NwSplit] ## split_leaf( D1, RSplits, RIds, Lim, Alpha/Beta, NwR ).
 (1 - Split) :: Split :: split_leaf( D, _Splits, Ids, _Lim, _ABeta, Leaf ) :-
      Ids = ids(ListIds,_NumOfIds),
-	Leaf = leaf( D, ListIds ).
+     Leaf = leaf( D, ListIds ).
 
 % What about non uniform choice over Fspoints ? eg- only, ones with more 
 % discriminatory power should have more prb mass.
 %
 split_choice( Splits, ids(Ids,Len), Lim, F, Fspoint, LIdSt, RIdSt, LSplits, RSplits ) :-
-	% Ids = [_,_,_,_,_,_,_,_,_,_|_],
+     % Ids = [_,_,_,_,_,_,_,_,_,_|_],
      % Alternative clause, which draws a closure if no split is available ?
      2 * Lim =< Len,
-	pselect( Splits, F-Fspine, RemFSplits ), 
-	psplit( Fspine, Fspoint, LSpine, RSpine ), 
-	ids_dichotomy( F, Fspoint, Ids, Lim, LIds, RIds, LgL, LgR ),
-	spine_builds( LSpine, F, RemFSplits, LSplits ),
-	spine_builds( RSpine, F, RemFSplits, RSplits ),
+     pselect( Splits, F-Fspine, RemFSplits ), 
+     psplit( Fspine, Fspoint, LSpine, RSpine ), 
+     ids_dichotomy( F, Fspoint, Ids, Lim, LIds, RIds, LgL, LgR ),
+     spine_builds( LSpine, F, RemFSplits, LSplits ),
+     spine_builds( RSpine, F, RemFSplits, RSplits ),
      LIdSt = ids(LIds,LgL),
      RIdSt = ids(RIds,LgR).
 
@@ -60,8 +60,8 @@ spine_builds( [], _F, RemFSplits, RemFSplits ) :- !.
 spine_builds( [H|T], F, RemFSplits, [F-[H|T]|RemFSplits] ).
 
 ids_dichotomy( F, Fspoint, Ids, Lim, LIds, RIds, LgL, LgR ) :-
-	data:feature_index( F, FIndex ), 
-	memberchk( Fspoint-PointIds, FIndex ),
-	ord_int_intersection( Ids, PointIds, LIds, RIds, LgL, LgR ),
+     data:feature_index( F, FIndex ), 
+     memberchk( Fspoint-PointIds, FIndex ),
+     ord_int_intersection( Ids, PointIds, LIds, RIds, LgL, LgR ),
      LgL > Lim,
      LgR > Lim.
