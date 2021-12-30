@@ -318,7 +318,8 @@ Date = date(2021, 12, 29).
 @version 2:4:0
 
 */
-bims_version( 2:4:0, date(2021,12,29) ).
+% bims_version( 2:4:0, date(2021,12,29) ).
+bims_version( 2:4:1, date(2021,12,30) ).
 
 /** bims_citation( -Atom, -Bibterm ).
 
