@@ -4,8 +4,7 @@
 
 :- lib(stoics_lib:break_nth/4).
 :- lib(stoics_lib:en_list/2).
-
-:- lib(get_date_time/1).
+:- lib(stoics_lib:get_date_time/1).
 
 os_unique_by_date_test :-
      use_module( library(socket) ),  

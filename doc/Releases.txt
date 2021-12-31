@@ -2,26 +2,8 @@
 --------------------
 
 2.5
-   @ 2021/12/30  CLEANUP  removing write_list_elem_per_line.pl, write_list_elem_per_line_w_period.pl, write_help.pl,
-                          write_help.pl, unprotected_splits.pl, spcs.pl, band_bn.pl, basename.pl, bn_to_dot_dag.pl,
-                          bn_to_dot_dag.pl, bn_to_dot_dag.pl, dir_will_exist.pl, div_list.pl, file_to_list_of_chars.pl,
-                          has_extension.pl, head_to_spec.pl, load_dynamic.pl, list_of_lines_to_file.pl,
-                          swi_directory_files.pl, file_to_list_of_lines.pl, fname_extension.pl, select_either.pl,
-                          contains.pl, to_functor.pl, name_term.pl, read_terms.pl, select_first.pl, tmp_file.pl,
-                          list_frequency.pl, write_def.pl, to_upper_case.pl, write_list_of_lists_to_spaced_line_per_skim.pl,
-                          tuple_to_list.pl, shorten_long_lines.pl, tmp_in_options.pl, tabled_term_copy.pl,
-                          term_bn_to_atom.pl, terms.pl, test_afn.pl, split_on_indices.pl, spc_delim_nums_line_to_matrix.pl,
-                          slp_in_options.pl, simple_decimal_separator.pl, select_once_list.pl, select_n_uniformly.pl,
-                          select_compound_w_gunzip.pl, select_all.p, rnd_codes.pl, replace_many_with_one_code.pl,
-                          replace_all_sublists.pl, read_term_frequencies.pl, read_nth_unifying_term.pl,
-                          random_v2.c, random_v1.c, prepend_module_list.pl, postfix_atom.pl, pbc_true.pl,
-                          pad_ranges.pl, ord_subset_difference.pl, ord_add_list.pl, options_multi_lists_cohese.pl,
-                          options_load_files.pl, options_gzip_at_end.pl, number_abbreviation.pl, non_dir_exists.pl,
-                          mould_vars_list.pl, mktemp_in_dir.pl, memberchk_kv_or_empty.pl, memberchk_kv_or_empty.pl,
-                          matching_terms_in_list.pl, longest_prefix.pl, list_to_tuple.pl, lines_to_first_numbers.pl,
-                          kv_write_transpose.pl
+                 DELINK:  opts_select_infiles.pl, atom_number.pl, delete_file_if.pl, file_name_extends.pl
 
-                 DELINK:  opts_select_infiles.pl, atom_number.pl
 2.4              @ 2021/12/29
     @ 2021/12/29 DEPS:    started dependency to pack(stoics_lib)
                  CHANGED: head_to_spec/2 -> goal_spec/2

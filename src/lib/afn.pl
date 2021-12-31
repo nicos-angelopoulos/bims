@@ -1,4 +1,4 @@
-:- ensure_loaded( pl ).        % /1.
+:- ensure_loaded(pl).        % /1.
 :- use_module(library(system)).  % file_exists/1.
 :- use_module(library(lists) ).  % member/2.
 

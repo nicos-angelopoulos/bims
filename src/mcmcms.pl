@@ -21,10 +21,8 @@
 
 :- lib(stoics_lib:en_list/2).
 :- lib(lss/0).
-:- lib(copy_stream_on_stream/2).
 :- lib(dbg/2).                    %
 :- lib(werr/2 ).                   % /1.
-:- lib(esr/1).
 :- lib(mcmcms_top_dir/1).          % bb_puts it.
 :- lib(is_list_of_n_vars/2).
 :- lib(unique_filename/3).
@@ -33,6 +31,8 @@
 :- lib(open_mode/3).
 :- lib(call_error/3).
 :- lib(bb_default/2).
+:- lib(delete_file_if/1).
+% fixme: copy_stream_data/2 is built-in in SWI
 
 % :- pl( sicstus(_S), ensure_loaded( library(number_atom) ) ).        % /2.
 
@@ -77,7 +77,7 @@ mcmcms_main( _SttOut, _ResOut, _RepOut, _S, _K, _SGl, _R, _Np, _H, TmpLoad ) :-
                 ['You can use option debug(true) to view check points of the program execution.'],
                 ['If you cannot resolve the problem don\'t hasitate to send a bug report, to:'],
                 [Maintainer]],
-     ( file_exists(TmpLoad) -> delete_file(TmpLoad) ; true ),
+     delete_file_if( TmpLoad ),
      werr( Failure ),
      abort.
 
@@ -85,7 +85,6 @@ main_out( SttO, ResO, RepO, S, Kid, SGl, R, Np, H ) :-
      main_out( SttO, ResO, RepO, S, Kid, SGl, R, Np, H, null__ ).
 
 main_out( SttO, ResO, RepO, S, Kid, SGl, R, Np, H, TmpLoad ) :-
-     %% esr(set_output( Stats )),
      % for the following, use pl/1 instead/additionally.
      ( TmpLoad == null__ ->
           true
@@ -99,7 +98,7 @@ main_out( SttO, ResO, RepO, S, Kid, SGl, R, Np, H, TmpLoad ) :-
                % Stats = SlpO
                SttO = SlpO
           ),
-          copy_stream_on_stream( ReadFrom, SlpO ),
+          copy_stream_data( ReadFrom, SlpO ),
           close( ReadFrom ),
           current_output( OldCOut ),
           werr( ['--- start listing of last_skips/2'], info, '', SlpO ),
@@ -111,26 +110,15 @@ main_out( SttO, ResO, RepO, S, Kid, SGl, R, Np, H, TmpLoad ) :-
           delete_file_if( TmpLoad )
      ),
      main_statistics( StartAt, SttO ),
-     % esr( current_output(OldOut) ),
-     % esr( set_output(Results)),
      %% bid_exclude_lbl( Kid ),
-     %%% testing Swi's randoms.
-     %%% getrand( Got ),
-     %%% random( R ),
-     %%% write( user_error, Got-R ), abort,
      assert_unique( bims_report:stream(RepO) ),
      kernel( SGl, H, R, Kid, Np, ResO ),
-     %% esr(set_output( Stats )),
-     % esr( set_output(OldOut) ),
      main_statistics( EndWith, SttO),
      Total is (EndWith - StartAt) / 1000,
-     % write( Stats, ((EndWith - StartAt) / 1000) ), write( Stats, ' = ' ), nl(Stats),
-     % writeq( Stats, Total ), nl(Stats),
      nl( SttO ),
      pc( SttO, total(((EndWith - StartAt) / 1000), Total) ),
      bims_bb_get( bk_failures, Failures ),
      ( Failures = [] -> 
-          % write( Stats, 'There were no backtracking failures.' )
           % just be silent...
           true
           ;

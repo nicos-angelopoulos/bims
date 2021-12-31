@@ -1,1 +1,0 @@
-/home/nicos/pl/lib/unclean/list/delete_leading.pl

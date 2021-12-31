@@ -4,11 +4,11 @@
 % :- ensure_loaded( '../../src/init_lib' ).		%.
 % :- ensure_loaded( bims('models/bns/src/auxil/disp_bn' ).
 
-% uses bims:delete_file_if/2
 :- ensure_loaded( library(charsio) ).		% write_to_chars/2
 :- ensure_loaded( library(system) ).		% system/1, environ/2.
 :- ensure_loaded( library(lists) ).		% append/3, memberchk/2.
-:- bims:requires( unique_filename/3 ).
+:- lib(unique_filename/3).
+:- lib(delete_file_if/2).
 
 /* 
      Model = cart( f1, 1, leaf(_,[]), leaf(_,[]) ),
@@ -19,7 +19,6 @@ display_model( Cart, Opts ) :-
 	% bb_put( node_width, 0.4 ),
 	display_model_defaults( Defs ),
 	append( Opts, Defs, CmpOpts ),
-	trace,
 	kats_n_zeros( Kats, Zeros ),
 	cart_to_structure( Cart, 1, Kats/Zeros, _, _, Str ),
      % mktemp( tmp_disp_XXXXXX, PrvTmp ),
@@ -82,7 +81,7 @@ display_model( Cart, Opts ) :-
 	memberchk( delete(DelBool), CmpOpts ),
 	debug( display_model, 'Delete bool: ~w, for file: ~p', [DelBool,Tmp] ),
 	( DelBool == true ->
-		bims:delete_file_if( Tmp )
+		delete_file_if( Tmp )
 		;
 		true
 	).
