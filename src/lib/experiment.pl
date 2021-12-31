@@ -23,8 +23,10 @@
 :- ensure_loaded( 	rnd_seeds ).
 
 :- pl( swi(_), 
-          ensure_loaded( library(swi_compat) ),
+          true,
           use_module(library(terms), [variant/2]) ).
+
+:- lib(stoics_lib:list_frequency/2).
 
 exper_setrand(  Rand ) :-
 	( var(Rand) ->
@@ -398,17 +400,3 @@ day_trailer( 1, 'st' ) :- !.
 day_trailer( 2, 'nd' ) :- !.
 day_trailer( 3, 'rd' ) :- !.
 day_trailer( _AllOther, 'th' ).
-
-list_frequency( [H|T], [H-HTimes|CountedT] ) :-
-        list_frequency_1( T, H, 1, HTimes, ReducedT ),
-        list_frequency( ReducedT, CountedT ).
-list_frequency( [], [] ).
-
-list_frequency_1( [H|T], El, Acc, Count, RedT ) :-
-        variant( El, H ),
-        !,
-        Acc1 is Acc + 1,
-        list_frequency_1( T, El, Acc1, Count, RedT ).
-list_frequency_1( [H|T], El, Acc, Count, [H|RedT] ) :-
-        list_frequency_1( T, El, Acc, Count, RedT ).
-list_frequency_1( [], _El, Acc, Acc, [] ).

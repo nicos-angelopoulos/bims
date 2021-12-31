@@ -1,5 +1,5 @@
 
-:- lib(en_list/2).
+:- lib(stoics_lib:en_list/2).
 
 werr( MessIn ) :-
      % default call is `true'

@@ -48,11 +48,6 @@ to_swi_nb_key_value( PrvKey, Key ) :-
      ).
 
 /*
-variant( X, Y ) :-
-     \+ \+ (X = Y).
-     */
-
-/*
 bb_get( Key, Old ) :-
 	Err=error( existence_error(variable, Key), context(system:nb_getval/2, _)),
 	catch( nb_getval(Key,Old), Err, fail ).

@@ -1,5 +1,6 @@
 :- use_module( library(bims) ).
 
+% 21.12.30; this is called from anywhere, keeping here for reference
 :- ensure_loaded( library(lists) ).		% memberchk/2.
 :- ensure_loaded( library(ordsets) ).		% ord_intersection/4.
 
@@ -58,7 +59,7 @@ data_feature_indices( Data ) :-
 	% bims:bims_ensure_data_loaded( carts, carts, Data, _AbsData ).
 	% % read_terms( Data, Terms ),
 	% % include( name_term(data), Terms, DTerms ),
-	% fixme: also add header recognision
+	% fixme: also add header recognition
 	data_terms_feature_indices.
 	% %data_terms_feature_indices( DTerms, Ids, Fids ).
 % data_feature_indices( Data, Ids, Fids ) :-
@@ -133,9 +134,6 @@ data_terms_feature_indices :-
 	bims:assert_unique( data:all_categories(Kats) ),
 	length( Kats, K ),
 	bims:assert_unique( data:num_of_categories(K) ).
-
-name_term( Name, Term ) :-
-	functor( Term, Name, _ ).
 
 /*
 red_cart_to_full( CartIn, Depth, InIds, CartOut ) :-

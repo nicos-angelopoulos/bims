@@ -1,10 +1,11 @@
 
 :- use_module(library(date)).
-:- ensure_loaded(library(apply)).
+:- use_module(library(apply)).
+
+:- lib(stoics_lib:break_nth/4).
+:- lib(stoics_lib:en_list/2).
 
 :- lib(get_date_time/1).
-:- lib(break_nth/4).
-:- lib(stoics_lib:en_list/2).
 
 os_unique_by_date_test :-
      use_module( library(socket) ),  

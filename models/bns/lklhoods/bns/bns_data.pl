@@ -1,6 +1,5 @@
 
-% :- requires( bims:assert_unique/1 ).
-% :- requires( bims:kv_decompose/3 ).
+:- lib(stoics_lib:kv_decompose/3).
 
 bns_data( Opts ) :-
 	debug( bims, 'Options for bns_data: ~w', [Opts] ),
@@ -13,7 +12,7 @@ bns_data( Opts ) :-
 				    		      , NodeVals ),
 				   sort( NodeVals, Poset )
 	                ), PosetPrs ),
-	bims:kv_decompose( PosetPrs, _Nds, Posets ),
+	stoics_lib:kv_decompose( PosetPrs, _Nds, Posets ),
 	sort( Posets, Sosets ),
 	bns_data_sets_assert( Sosets, PosetPrs ).
 

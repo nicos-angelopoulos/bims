@@ -4,11 +4,10 @@
 % :- ensure_loaded( '../src/mcmcms' ).
 % :- ensure_loaded( '../src/init_lib' ).
 :- lib(source(bims), homonyms(true)).
-:- lib(stoics_lib).  % en_list/2, goal_spec/2.
+:- lib(stoics_lib).  % en_list/2, goal_spec/2, portray_clauses/2.
 
 :- lib(mcmcms/12).
 :- lib(os_unique_by_date/2).
-:- lib(write_terms/2).
 :- lib(n_digits/3).
 :- lib(clean_module/1).
 :- lib(report_triggers/1).
@@ -277,7 +276,7 @@ bims( ArgsPrv ) :-
     bims_write_abs_options( BroF, abs(AbsLkl,AbsData,AbsDlp) ),
     bims_runs( Runs, 1, RcLen, Model, AbsDlp, Seeds, ResD, Goal, Opts ),
     get_date_time( Now ),
-    write_terms( BroF, finished_at(Now), mode(append) ),
+    portray_clauses( [finished_at(Now)], [file(BroF),mode(append)] ),
     bims_option_debug_set( DbgRestore ).
 
 bims_runs( 0, _I, _Dgs, _Mdl, _, _Seelds, _ResD, _Goal, _Opts ) :-
@@ -588,7 +587,6 @@ bims_progress_reporter( _Its, _Pc, _Stub ).
 bims_write_options( BroF, UnqOpts ) :-
     open( BroF, write, Out ), 
     write( Out, '% options' ), nl( Out ),
-    % write_terms_stream( Out, UnqOpts, [] ),
     maplist( mcmcms_write_fact(Out), UnqOpts ),
     close( Out ).
 

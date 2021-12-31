@@ -17,9 +17,9 @@ testi :- print_message( warning, error(existance_error(environ,malaka,somewhere/
 user:message_hook(error(existance_error(environ,Var,Goal)),
                                                  Type,_InLines) :-
                mcmcms_message_prefix( Type, Pfx ),
-               to_functor( Goal, Fun ),
+               functor( Goal, Pn, Ar ),
                Lines = [
-                  '~w: Required environment variable `~w\' doesnot exist '-[Fun,Var]],
+                  '~w: Required environment variable `~w\' doesnot exist '-[Pn/Ar,Var]],
                print_message_lines(user_error, Pfx, Lines ).
 
 /* we need this  for the throw cases...  in Swi */

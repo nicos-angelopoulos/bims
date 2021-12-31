@@ -29,16 +29,11 @@ assert_model_paths :
    assert_model_paths.
 
 :- pl( swi(_A),  ensure_loaded('lib/swi_compat') ).
-% :- ensure_loaded( 'lib/requires_minimal' ). % requires/1.
 :- ensure_loaded( 'lib/defines' ).
 :- ensure_loaded( 'lib/els' ).
 :- ensure_loaded( 'lib/mcmcms_top_dir' ).
 :- ensure_loaded( 'lib/elm' ).
 
-/* now defined in library(requires)
-lib( Lib ) :- 
-	ensure_loaded( library(Lib) ).
-	*/
 :- (current_predicate(lib/1)->true; 
        assert(lib(Lib):-use_module(library(Lib)))
 	).

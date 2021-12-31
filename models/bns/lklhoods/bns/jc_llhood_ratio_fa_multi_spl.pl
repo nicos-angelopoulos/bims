@@ -4,9 +4,8 @@
 % _multi_ because it
 % looks for the frequency of data at the last argument of data/n.
 
-% :- requires( bims:kv_compose/3 ).
 % :- requires( bims:kvs_insert/4 ).
-:- ensure_loaded( 'src/kv_compose' ).
+:- lib(stoics_lib:kv_compose/3).
 :- ensure_loaded( 'src/kvs_insert' ).
 :- ensure_loaded( 'src/kvs_replace_v_or_insert' ).
 

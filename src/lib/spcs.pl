@@ -1,1 +1,0 @@
-../../../../../lib/unclean/write/spcs.pl

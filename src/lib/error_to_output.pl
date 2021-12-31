@@ -1,1 +1,0 @@
-/home/nicos/pl/lib/unclean/error/error_to_output.pl

@@ -8,9 +8,9 @@
 
 % :- ensure_loaded( library(cc) ).        % init_cc/0, next_cc/1, bims_bb_get(cc).
 :- lib(stoics_lib:en_list/2).
+
 :- lib(cc/0).                      % init_cc/0, next_cc/1, bims_bb_get(cc).
 :- lib(unique_filename/2).
-:- lib(kv_decompose/3).
 :- lib(defined_elsewhere/2).
 :- lib(delete_file_if/1).
 :- lib(clean_module/1).

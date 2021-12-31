@@ -1,1 +1,0 @@
-../../../../../lib/unclean/option/write_help.pl

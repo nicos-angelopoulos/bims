@@ -24,7 +24,6 @@
 :- lib(copy_stream_on_stream/2).
 :- lib(dbg/2).                    %
 :- lib(werr/2 ).                   % /1.
-:- lib(error_to_output/2).
 :- lib(esr/1).
 :- lib(mcmcms_top_dir/1).          % bb_puts it.
 :- lib(is_list_of_n_vars/2).

@@ -1,11 +1,12 @@
 
-:- ensure_loaded( library(lists) ).     % append/3, member/2, flatten/2.
-:- ensure_loaded( library(system) ).    % file_exists/1.
+:- use_module(library(lists)).     % append/3, member/2, flatten/2.
+:- use_module(library(system)).    % file_exists/1.
 
 :- lib(stoics_lib:en_list/2).
-:- lib(break_nth/4).
+:- lib(stoics_lib:break_nth/4).
+:- lib(stoics_lib:break_on_list/4).
+
 :- lib(file_exists/1).
-:- lib(break_list_on_list/4).
 :- lib(option_in_values_or_else_default/6).
 
 /*
@@ -80,7 +81,6 @@ unique_filename( FileIn, UnqFile, OptsIn ) :-
      atom_codes( Stem, StemCs ),
      uf_unique_additions( Additions, Sep, StemCs, UnqStemCs ),
      atom_codes( UnqStem, UnqStemCs ),
-     % has_extension( Test, UnqStem, Ext ),
      file_name_extension( UnqStem, Ext, Test ),
      ( type_exists(Test,All) ->
           append( Sep, VrsPfx, Vrs ),
@@ -95,7 +95,6 @@ unique_filename( FileIn, UnqFile, OptsIn ) :-
      !.
 
 unique_filename_1( Stem, Ext, Vrs, Rep, UnqFile, Opts ) :-
-     % has_extension( File, Stem, Ext ),
      file_name_extension( Stem, Ext, File ),
      type_exists( File, Opts ),
      !,
@@ -106,7 +105,6 @@ unique_filename_1( Stem, Ext, Vrs, Rep, UnqFile, Opts ) :-
      unique_filename_1( NextStem, Ext, Vrs, Rep, UnqFile, Opts ).
 unique_filename_1( Stem, Ext, _Vrs, _Rep, File, _Opts ) :-
      file_name_extension( Stem, Ext, File ).
-     % has_extension( File, Stem, Ext ).
 
 type_exists( File, Opts ) :-
      memberchk( type(Type), Opts ),
@@ -130,7 +128,7 @@ next_filename( CharListIn, Vrs, CharListOu_T ) :-
      append( CharListOut1, "/", CharListOu_T ).
 next_filename( Stem, Vrs, NxtStem ) :-
      % i dont think this necessary any longer
-     % ( (break_list_on_list( CharListIn, ".", Main, Vrss ),
+     % ( (break_on_list( CharListIn, ".", Main, Vrss ),
           %    \+ member( 0'/, Vrss ) ) ->
           %    append( ".", Vrss, DotVrss )
           %    ; 
@@ -140,7 +138,7 @@ next_filename( Stem, Vrs, NxtStem ) :-
           %     Main = CharListIn, DotVrss = []
           %    )
      % ),
-     ( break_list_on_list( Stem, Vrs, Trunk, Vers ) ->
+     ( break_on_list( Stem, Vrs, Trunk, Vers ) ->
           next_version( Vers, NextVers )
           ;   
           Trunk = Stem, NextVers = "01"
@@ -189,7 +187,6 @@ uf_unique_additions( [add(Call,Lgt)|T], Sep, Acc, Stem ) :-
      uf_unique_additions( T, Sep, Nxt, Stem ).
 
 file_and_extension( FileIn, ExtOpt, Stem, Ext ) :-
-     % ( has_extension(FileIn,StemHas,ExtHas) ->
      ( file_name_extension(StemHas,ExtHas,FileIn) ->
           ( ExtOpt==ExtHas -> 
                Stem = StemHas,
