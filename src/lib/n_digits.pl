@@ -1,6 +1,6 @@
 
 % :- use_module( library(term_type) ). % term_codes/2 % from bims avoid dependency on other libs.
-:- lib(stoics:codes_n_digits/3).
+:- lib(stoics_lib:codes_n_digits/3).
 
 %% n_digits( +N, +In, -Out ).
 %
