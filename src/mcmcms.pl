@@ -32,7 +32,7 @@
 :- lib(call_error/3).
 :- lib(bb_default/2).
 :- lib(delete_file_if/1).
-% fixme: copy_stream_data/2 is built-in in SWI
+% fixme: copy_stream_data/2 is built-in in SWI, see copy_stream_on_stream.pl if you need compatibility in the future
 
 % :- pl( sicstus(_S), ensure_loaded( library(number_atom) ) ).        % /2.
 
