@@ -110,6 +110,7 @@ the system can be used on new statistical models.
 @version  2.2 2017/04/18, web-doc; de-git
 @version  2.3 2018/12/21, aux/ -> aux_code
 @version  2.4,2021/12/29, run on SWI 8.5.4; github core complete
+@version  2.5,2022/12/29, run on SWI 8.5.4; github core complete
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
@@ -309,16 +310,15 @@ Version Mj:Mn:Fx, and release date date(Y,M,D).
 
 ==
 ?- bims_version(Vers, Date).
-Vers = 2:4:0,
-Date = date(2021, 12, 29).
+Vers = 2:5:0,
+Date = date(2022, 1, 2).
 ==
 
 @see doc/Releases.txt for more detail on change log
-@version 2:4:0
+@version 2:5:0
 
 */
-% bims_version( 2:4:0, date(2021,12,29) ).
-bims_version( 2:4:1, date(2021,12,30) ).
+bims_version( 2:5:0, date(2022,1,2) ).
 
 /** bims_citation( -Atom, -Bibterm ).
 

@@ -1,11 +1,12 @@
 ---   Releases   ---
 --------------------
 
-2.5
+2.5              @ 2022/01/02
+    2022/01/02   CLEANUP: A number of dangling files in src/lib were removed
                  DELINK:  opts_select_infiles.pl, atom_number.pl, delete_file_if.pl, file_name_extends.pl
 
 2.4              @ 2021/12/29
-    @ 2021/12/29 DEPS:    started dependency to pack(stoics_lib)
+    2021/12/29   DEPS:    started dependency to pack(stoics_lib)
                  CHANGED: head_to_spec/2 -> goal_spec/2
                  CHANGED: to_list/2 -> en_list/2
                  DELINK:  option_in_values_or_else_default.pl,werr.pl,is_letter.pl,if.pl,ord_only_add_elem.pl
@@ -16,7 +17,8 @@
                  FIXED:   ref to dir in cart.dlp from aux to aux_code.
                  CHANGED: ensure_loaded(aux_code/ord_int_intersection) to compile()
 
-2.3 @ 2018/12/21 - wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
+2.3              @ 2018/12/21 
+    2018/12/21   CHNAGED: wins don't like models/carts/dlps/aux -> aux_code and ref in cart.dlp
 
 2.2 @ 2017/04/18 - typos in Readme, remove .git from distro, changed licence.
                  - added references to the BN likelihoods (README)
