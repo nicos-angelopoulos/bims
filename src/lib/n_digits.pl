@@ -1,6 +1,6 @@
 
 % :- use_module( library(term_type) ). % term_codes/2 % from bims avoid dependency on other libs.
-:- lib(stoics_lib:codes_n_digits/3).
+:- lib(stoics_lib:lexi_n/4).
 
 %% n_digits( +N, +In, -Out ).
 %
@@ -21,5 +21,4 @@
 n_digits( N, In, Out ) :-
 	% term_codes( In, Codes ), % for pack(bims) use:
 	name( In, Codes ),
-	codes_n_digits( Codes, N, OutCodes ),
-	atom_codes( Out, OutCodes ).
+	lexi_n( Codes, N, 0'0, + Out ).

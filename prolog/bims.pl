@@ -4,7 +4,7 @@
 % :- ensure_loaded( '../src/mcmcms' ).
 % :- ensure_loaded( '../src/init_lib' ).
 :- lib(source(bims), homonyms(true)).
-:- lib(stoics_lib).  % en_list/2, goal_spec/2, portray_clauses/2.
+% :- lib(stoics_lib).  % en_list/2, goal_spec/2, portray_clauses/2.
 
 :- lib(mcmcms/12).
 :- lib(os_unique_by_date/2).

@@ -1,6 +1,8 @@
 ---   Releases   ---
 --------------------
 
+2.6
+    2022/11/06   CHANGED: codes_n_digits/3 -> lexi_n/4
 2.5              @ 2022/01/02
     2022/01/02   CLEANUP: A number of dangling files in src/lib were removed
                  DELINK:  opts_select_infiles.pl, atom_number.pl, delete_file_if.pl, file_name_extends.pl
