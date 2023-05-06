@@ -6,16 +6,16 @@
 
 :- ensure_loaded( 'lib/dlp_file_location' ).	     % /1.
 
-/** dload( DlpF ).
-    dload( DlpF, Opts ).
+/** dlp_load( DlpF ).
+    dlp_load( DlpF, Opts ).
 
 Load a Dlp file into memory. 
 
 The predicate loads two versions of the Dlp file. One in module =|dlp_sld|= (suitalble 
-for SLD resolution, see dcall/2) and one in module =|dlp_ssr|=, which is suitable for stochastic sampling
-resolution (see sample/1).
+for SLD resolution, see dlp_call/2) and one in module =|dlp_ssr|=, which is suitable for stochastic sampling
+resolution (see dlp_sample/1).
 
-Dlp files are looked for in ./dlp and pack(bims/dlp/). So =|dload(coin)|=
+Dlp files are looked for in ./dlp and pack(bims/dlp/). So =|dlp_load(coin)|=
 will load file pack(bims/dlp/coin.dlp from the local pack(bims) installation.
 
 Opts
@@ -26,14 +26,14 @@ Opts
   * tmp_ssr(SldF=DlpF__ssr.pl)
     temporary file for the stochastic sampling resolution clauses
 */
-dload( Dlp ) :-
-     dload( Dlp, [] ).
+dlp_load( Dlp ) :-
+     dlp_load( Dlp, [] ).
 
-dload( Dlp, Opts ) :-
+dlp_load( Dlp, Opts ) :-
      %fixme: trace,
      dlp_file_location( Dlp, File ),
 	all_dynamic( [File] ),
-	dload_defaults( File, Defs ),
+	dlp_load_defaults( File, Defs ),
 	append( Opts, Defs, All ),
 	memberchk( rm(Del), All ),
 	memberchk( tmp_sld(SldF), All ),
@@ -42,7 +42,7 @@ dload( Dlp, Opts ) :-
 	memberchk( tmp_ssr(SsrF), All ),
      ad_to_slp( [msd(rm),rm(Del),tmp(SsrF),mod(dlp_ssr),ad_clean(true)] ).
 
-dload_defaults( Path, Defs ) :-
+d_load_defaults( Path, Defs ) :-
      directory_file_path( _, File, Path ), 
      file_name_extension( Stem, _Ext, File ),
      atom_concat( Stem, '__dload__sld', SldStem ),
