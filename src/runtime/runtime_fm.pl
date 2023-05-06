@@ -1,7 +1,9 @@
 :- use_module( library(random) ).
 
-%% :- bb_put( sid, 1 ).
+% fixme: 23.05.06: this no longer seem to be working- runtime_rm.pl has
+%                  a select_id/6, and a commented out select_id/9
 
+%% :- bb_put( sid, 1 ).
 % select_id( ClsArgs, InArgs, Lbls, Nth, FPId, FPTl, SPId, SelId, FPCont ) :-
 % ClsArgs, the defined arguments of clauses.
 % the Input Arguments.

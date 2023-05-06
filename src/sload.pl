@@ -6,6 +6,9 @@
 
 :- ensure_loaded( 'lib/opts_have_help' ).	     % /1.
 :- ensure_loaded( 'lib/opts_select_infiles' ).	% /3.
+:- ensure_loaded( 'lib/dlp_file_location' ).	     % /1.
+
+% fixme: sload(coin).
 
 sload( InOptsPrv ) :-
      ( is_list(InOptsPrv) -> InOpts=InOptsPrv; InOpts=[InOptsPrv] ),
@@ -19,12 +22,15 @@ sload( InOptsPrv ) :-
 		sload( Files, OthOpts )
 	).
 
-sload( Files, Opts ) :-
+sload( FilesIn, Opts ) :-
+     %fixme: trace,
+     maplist( dlp_file_location, FilesIn, Files ),
 	all_dynamic( Files ),
 	sload_defaults( Defs ),
 	append( Opts, Defs, All ),
 	memberchk( rm(Del), All ),
 	memberchk( tmp(Tmp), All ),
-	ad_to_slp( [rm(Del),tmp(Tmp)] ).
+     % fixme:msd()
+	ad_to_slp( [msd(fm),rm(Del),tmp(Tmp)] ).
 
 sload_defaults( [rm(true),tmp('tmp_sload.slp')] ).
