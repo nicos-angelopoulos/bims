@@ -42,7 +42,7 @@ dlp_load( Dlp, Opts ) :-
 	memberchk( tmp_ssr(SsrF), All ),
      ad_to_slp( [msd(rm),rm(Del),tmp(SsrF),mod(dlp_ssr),ad_clean(true)] ).
 
-d_load_defaults( Path, Defs ) :-
+dlp_load_defaults( Path, Defs ) :-
      directory_file_path( _, File, Path ), 
      file_name_extension( Stem, _Ext, File ),
      atom_concat( Stem, '__dload__sld', SldStem ),
