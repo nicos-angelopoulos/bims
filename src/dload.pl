@@ -4,8 +4,6 @@
 :- ensure_loaded( all_dynamic ).			% /1.
 :- ensure_loaded( ad_to_slp ).			% /1.
 
-:- ensure_loaded( 'lib/opts_have_help' ).	     % /1.
-:- ensure_loaded( 'lib/opts_select_infiles' ).	% /3.
 :- ensure_loaded( 'lib/dlp_file_location' ).	     % /1.
 
 /** dload( DlpF ).
@@ -33,7 +31,7 @@ dload( Dlp ) :-
 
 dload( Dlp, Opts ) :-
      %fixme: trace,
-     dlp_file_location, Dlp, File ),
+     dlp_file_location( Dlp, File ),
 	all_dynamic( [File] ),
 	dload_defaults( File, Defs ),
 	append( Opts, Defs, All ),
