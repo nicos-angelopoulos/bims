@@ -1,4 +1,4 @@
-:- module( bims, [bims/0,bims/1,bims_version/2,bims_citation/2] ).
+:- module( bims, [bims/0,bims/1,bims_version/2,bims_citation/2,dload/1,dload/2] ).
 
 :- use_module( library(lib) ).
 % :- ensure_loaded( '../src/mcmcms' ).
@@ -19,9 +19,7 @@
 :- lib(remove_template_duplicates/2).
 :- lib(get_date_time/1).
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
-
-%fixme: 
-:- lib(sload/1).
+:- lib(dload/1).
 :- lib(end(bims)).
 % :- lib_pack_end( bims ).
 
