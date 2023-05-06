@@ -34,18 +34,20 @@ ad_to_slp( Opts ) :-
 	write('             writing onto a temporary file, which is then loaded to memory.'), nl,
 	nl,
 	write( 'Options:' ), nl,
-	write( '         load/1:  load method, in {(cm),cn}, for compile or consult' ), nl,
-     write( '         mod/1:   module in which to load the result, (slp)' ), nl,
-	write( '         msd/1:   model space identifier, in {(rm),fm,sld}' ), nl,
-	write( '         rm/1:    {(true),false,filename} for deleting temmporary file or moving to filename' ),
-	write( '         tmp/1:   the temporary file to use (def:slp_transformed.pl)' ), nl,
+	write( '         ad_clean/1:  whether to clean module(ad), (true)' ), nl,
+	write( '         load/1:      load method, in {(cm),cn}, for compile or consult' ), nl,
+     write( '         mod/1:       module in which to load the result, (slp)' ), nl,
+	write( '         msd/1:       model space identifier, in {(rm),fm,sld}' ), nl,
+	write( '         rm/1:       {(true),false,filename} for deleting temmporary file or moving to filename' ),
+	write( '         tmp/1:      the temporary file to use (def:unique based on dlp__transform__<MSD> stem' ), nl,
 	nl, nl.
 
 ad_to_slp( InOpts ) :-
-	ad_to_slp_defaults( Defs ),
+	ad_to_slp_defaults( InOpts, Defs ),
 	append( InOpts, Defs, Opts ),
 	memberchk( mod(Mod), Opts ),
 	clean_module( Mod ),
+     % fixme: do we need to provision that when coming from dload/1,2 ?
 	init_cc,
 	bims_bb_get( ad:all_preds, Ps ),
 	memberchk( tmp(Tmp), Opts ),
@@ -59,7 +61,8 @@ ad_to_slp( InOpts ) :-
 	LoadCall =.. [LdPname,Tmp],
 	call( LoadCall ),
 	% abolish( ad:_ ),
-	clean_module( ad ),
+     memberchk( ad_clean(Adc), Opts ),
+     ad_clean( Adc ),
 	memberchk( rm(Rm), Opts ),
 	( Rm == true ->
 		delete_file_if( Tmp )
@@ -71,17 +74,25 @@ ad_to_slp( InOpts ) :-
 		)
 	).
 
-ad_to_slp_defaults( Defs ) :-
+ad_clean( false ) :- !.
+ad_clean( _ ) :-         % make this the "super" default
+	clean_module( ad ).
+
+ad_to_slp_defaults( Opts, Defs ) :-
+     DefMsd = rm,
 	Defs = [
 			% tmp('slp_transformed.pl'),
+               ad_clean(true),
 			tmp(Tmp),
                mod(slp),
-			msd(rm),
+			msd(DefMsd),
 			load(cm),
 			rm(true)
 		],
      UFOpts = [report(false),add(environ('HOSTNAME'),8)],
-     unique_filename( translated__slp, Tmp, UFOpts ).
+     ( memberchk(msd(Msd),Opts) -> true; Msd = DefMsd ),
+     atom_concat( dlp_transform__, Msd, Stem ),
+     unique_filename( Stem, Tmp, UFOpts ).
 
 preds_to_file( [], _File ).
 preds_to_file( [Hspec|Theads], File ) :-

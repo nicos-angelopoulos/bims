@@ -26,11 +26,21 @@ sload( FilesIn, Opts ) :-
      %fixme: trace,
      maplist( dlp_file_location, FilesIn, Files ),
 	all_dynamic( Files ),
-	sload_defaults( Defs ),
+	sload_defaults( Files, Defs ),
 	append( Opts, Defs, All ),
 	memberchk( rm(Del), All ),
 	memberchk( tmp(Tmp), All ),
      % fixme:
 	ad_to_slp( [msd(sld),rm(Del),tmp(Tmp)] ).
 
-sload_defaults( [rm(true),tmp('tmp_sload.slp')] ).
+% sload_defaults( [rm(true),tmp('tmp_sload.slp')] ).
+sload_defaults( Files, Defs ) :-
+     ( Files = [Path] -> 
+          directory_file_path( _, File, Path ), 
+          file_name_extension( Stem, _Ext, File ),
+          atom_concat( Stem, '__dload', Dtem ),
+          file_name_extension( Dtem, pl, TmpF )
+          ;
+          TmpF = 'tmp_dload.pl'
+     ),
+     Defs = [rm(true),tmp(TmpF)] ).
