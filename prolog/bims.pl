@@ -19,7 +19,7 @@
 :- lib(remove_template_duplicates/2).
 :- lib(get_date_time/1).
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
-:- lib(dload/1).
+:- lib(dlp_load/1).
 :- lib(end(bims)).
 % :- lib_pack_end( bims ).
 
