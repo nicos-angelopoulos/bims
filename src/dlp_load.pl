@@ -21,7 +21,7 @@ will load file pack(bims/dlp/coin.dlp from the local pack(bims) installation.
 Opts
   * rm(Rmv=true) 
     whether to remove temporary files which contain the loaded, transformed definite clauses
-  * tmp_sld(SldF=DLpF__sld.pl)
+  * tmp_sld(SldF=DlpF__sld.pl)
     temporary file for the SLD resolution clauses
   * tmp_ssr(SldF=DlpF__ssr.pl)
     temporary file for the stochastic sampling resolution clauses
