@@ -4,7 +4,11 @@
 % :- ensure_loaded( '../src/mcmcms' ).
 % :- ensure_loaded( '../src/init_lib' ).
 :- lib(source(bims), homonyms(true)).
-% :- lib(stoics_lib).  % en_list/2, goal_spec/2, portray_clauses/2.
+
+% :- lib(stoics_lib).  % en_list/2, goal_spec/2, portray_clauses/2. 
+% the following could be had from pack(stoics_lib)
+:- lib(goal_spec/2).
+:- lib(portray_clauses/2).
 
 :- lib(mcmcms/12).
 :- lib(os_unique_by_date/2).
@@ -16,6 +20,8 @@
 :- lib(get_date_time/1).
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
 
+%fixme: 
+:- lib(sload/1).
 :- lib(end(bims)).
 % :- lib_pack_end( bims ).
 

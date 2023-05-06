@@ -7,7 +7,8 @@
 :- ensure_loaded( 'lib/opts_have_help' ).	     % /1.
 :- ensure_loaded( 'lib/opts_select_infiles' ).	% /3.
 
-sload( InOpts ) :-
+sload( InOptsPrv ) :-
+     ( is_list(InOptsPrv) -> InOpts=InOptsPrv; InOpts=[InOptsPrv] ),
 	( opts_have_help(InOpts) ->
 		write( 'sload:    load an SLP to memory.' ), nl, nl,
 		write( ' Options,' ), nl,

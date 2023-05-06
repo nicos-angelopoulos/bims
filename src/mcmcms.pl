@@ -63,6 +63,7 @@ mcmcms( F,S,O,K,_M,B,P,R,D,H,Seed,SGl ) :-
      bims_random_index_set_seeds( Seed, SttOut ),
      bb_default( msd, rm ),
      bims_bb_put( bk_failures, [] ),
+     trace,
      mcmcms_load_prior( B, TmpLoad ),
      mcmcms_main( SttOut, ResOut, RepOut, S, K, SGl, R, Np, H, TmpLoad ),
      maplist( close, [ResOut,SttOut] ).
