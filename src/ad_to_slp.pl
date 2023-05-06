@@ -35,21 +35,23 @@ ad_to_slp( Opts ) :-
 	nl,
 	write( 'Options:' ), nl,
 	write( '         load/1:  load method, in {(cm),cn}, for compile or consult' ), nl,
-	write( '         msd/1:   model space identifier, in {(rm),fm}' ), nl,
+     write( '         mod/1:   module in which to load the result, (slp)' ), nl,
+	write( '         msd/1:   model space identifier, in {(rm),fm,sld}' ), nl,
 	write( '         rm/1:    {(true),false,filename} for deleting temmporary file or moving to filename' ),
 	write( '         tmp/1:   the temporary file to use (def:slp_transformed.pl)' ), nl,
 	nl, nl.
 
 ad_to_slp( InOpts ) :-
 	ad_to_slp_defaults( Defs ),
-	append( InOpts, Defs, Opts ), 
-	clean_module( slp ),
+	append( InOpts, Defs, Opts ),
+	memberchk( mod(Mod), Opts ),
+	clean_module( Mod ),
 	init_cc,
 	bims_bb_get( ad:all_preds, Ps ),
 	memberchk( tmp(Tmp), Opts ),
 	delete_file_if( Tmp ),
 	memberchk( msd(Msd), Opts ),
-	initial_slp_declarations_to_file( Tmp, Msd ),
+	initial_slp_declarations_to_file( Tmp, Mod, Msd ),
 	preds_to_file( Ps, Tmp ),
      built_ins_to_file( Tmp ),
 	memberchk( load(Load), Opts ),
@@ -73,6 +75,7 @@ ad_to_slp_defaults( Defs ) :-
 	Defs = [
 			% tmp('slp_transformed.pl'),
 			tmp(Tmp),
+               mod(slp),
 			msd(rm),
 			load(cm),
 			rm(true)
@@ -203,10 +206,10 @@ pred_to_s_pred( Proto, Hds, Bds, Lbls, (ExpHead:-ExpBody), TheSwitch ) :-
 	ExpBody = (TheSelect,SidxCall).
 	% ExpBody = (TheSelect,TheSwitch).
 
-initial_slp_declarations_to_file( File, Msd ) :-
+initial_slp_declarations_to_file( File, Mod, Msd ) :-
 	open( File, append, Stream ),
-	write( Stream, ':- module( slp, [] ).' ),
-	nl( Stream ),
+	% write( Stream, ':- module( slp, [] ).' ),
+	write( Stream, ':- module( ' ), write( Stream, Mod ), write( Stream, ', [] ).' ), nl( Stream ),
 	% write( Stream, ':- ' ),
 	% write( Stream, 'consult(library(\'../runtime\')).' ),
 	% write( Stream, 'compile(library(\'../runtime_' ),
