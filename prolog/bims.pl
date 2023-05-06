@@ -1,4 +1,4 @@
-:- module( bims, [bims/0,bims/1,bims_version/2,bims_citation/2,dload/1,dload/2] ).
+:- module( bims, [bims/0,bims/1,bims_version/2,bims_citation/2,dlp_load/1,dlp_load/2] ).
 
 :- use_module( library(lib) ).
 % :- ensure_loaded( '../src/mcmcms' ).
