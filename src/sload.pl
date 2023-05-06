@@ -30,7 +30,7 @@ sload( FilesIn, Opts ) :-
 	append( Opts, Defs, All ),
 	memberchk( rm(Del), All ),
 	memberchk( tmp(Tmp), All ),
-     % fixme:msd()
-	ad_to_slp( [msd(fm),rm(Del),tmp(Tmp)] ).
+     % fixme:
+	ad_to_slp( [msd(sld),rm(Del),tmp(Tmp)] ).
 
 sload_defaults( [rm(true),tmp('tmp_sload.slp')] ).
