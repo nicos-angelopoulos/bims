@@ -3,6 +3,8 @@
                          bims_version/2, bims_citation/2,
                          dlp_load/1, dlp_load/2,
                          dlp_sample/1,dlp_sample/3,
+                         dlp_call/1,dlp_call/3,
+                         dlp_call_sum/2,
                          dlp_seed/0, dlp_path_prob/2, dlp_path_prob/3
                          ] ).
 
@@ -27,6 +29,7 @@
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
 :- lib(dlp_load/1).
 :- lib(dlp_sample/1).
+:- lib(dlp_call/1).
 :- lib(dlp_path_prob/2).
 :- lib(dlp_seed/0).
 :- lib(end(bims)).
