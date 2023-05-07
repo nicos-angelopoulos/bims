@@ -27,6 +27,8 @@
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
 :- lib(dlp_load/1).
 :- lib(dlp_sample/1).
+:- lib(dlp_path_prob/2).
+:- lib(dlp_seed/0).
 :- lib(end(bims)).
 % :- lib_pack_end( bims ).
 
