@@ -1,0 +1,51 @@
+/** umember( +List, -Elem ).
+
+Draw uniformly an Element from List.
+
+==
+?- dlp_load(umember).
+
+?- dlp_seed.
+?- dlp_sample(umember([a,b,c],X)).
+X = a.
+
+?- dlp_sample(umember([a,b,c],X)).
+X = c.
+
+?- dlp_sample(umember([a,b,c],X)).
+X = b.
+
+?- dlp_sample(umember([a,b,c],X)).
+X = b.
+
+?-  dlp_call(umember([a,b,c],X),_,Prb).
+X = a,
+Prb = 0.3333333333333333 ;
+X = b,
+Prb = 0.33333333333333337 ;
+X = c,
+Prb = 0.33333333333333337 ;
+false.
+
+?-  dlp_call(umember([a,b,c,d],X),_,Prb).
+X = a,
+Prb = 0.25 ;
+X = b,
+Prb = 0.25 ;
+X = c,
+Prb = 0.25 ;
+X = d,
+Prb = 0.25 ;
+false.
+
+==
+
+@author nicos angelopoulos
+@version  0:1 2023/05/07
+
+*/
+:- pvars( umember(L,_E), [T-length(L,T)] ). 
+
+1/X :: X :: umember( [H|_T], H ).
+(1 - 1/X) :: X :: umember( [_H|T], El ) :-
+				[(X - 1)]:: umember( T, El ).

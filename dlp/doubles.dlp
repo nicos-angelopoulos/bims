@@ -1,0 +1,31 @@
+/** doubles(-Side).
+
+Flip a coin twice, and only succeed if both flips returned the same result.
+
+==
+?- dlp_load(doubles).
+?- dlp_seed.
+?- dlp_sample(doubles(Side)).
+Side = tail.
+
+?- dlp_call(doubles(Sides),_,Prb).
+Sides = head,
+Prb = 0.25 ;
+Sides = tail,
+Prb = 0.25 ;
+false.
+
+?- dlp_call_sum(doubles(_),Sum).
+Sum = 0.5.
+==
+
+@author nicos angelopoulos
+@version  0:1 2023/05/07
+
+*/
+1::doubles( X ) :-
+     coin( X ),
+     coin( X ).
+
+0.5 :: coin( head ).
+0.5 :: coin( tail ).
