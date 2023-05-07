@@ -14,12 +14,21 @@ clause that has probability label of =|1/4|=.
 ?- dlp_load(coin).
 ?- dlp_seed.
 ?- dlp_sample(coin(Flip)).
+Flip = head.
 
 ?- dlp_sample(coin(Flip)).
+Flip = tail.
 
 ?- dlp_seed.
 ?- dlp_sample(coin(Flip),Path,Prb).
+Flip = head,
+Path = [1/0.5],
+Prb = 0.5.
+
 ?- dlp_sample(coin(Flip),Path,Prb).
+Flip = tail,
+Path = [2/0.5],
+Prb = 0.5.
 ==
 
 @author nicos angelopoulos
@@ -39,5 +48,4 @@ dlp_sample( Goal, Path, Prb ) :-
      spec_constructs_scall( Functor/Arity, _Type, Path, Args, Slp ), 
      dlp_ssd:Slp,
      !,
-     trace,
      dlp_path_prob( Path, 1, Prb ).
