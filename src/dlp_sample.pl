@@ -31,4 +31,4 @@ dlp_sample( Goal, Path, Prb ) :-
      spec_constructs_scall( Functor/Arity, _Type, Path, Args, Slp ), 
      path_to_probability( Path, 1, Prb ),
      !.
-     path_to_probability( Path, 1, Prb ),
+     dlp_path_prob( Path, 1, Prb ).
