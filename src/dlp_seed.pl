@@ -19,6 +19,9 @@ Flip = head.
 ?- set_random(seed(101)).
 ?- dlp_sample(coin(Flip)).
 Flip = head.
+
+?- dlp_sample(coin(Flip)).
+Flip = tail.
 ==
 
 @author nicos angelopoulos

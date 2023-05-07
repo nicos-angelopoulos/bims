@@ -2,7 +2,7 @@
                          bims/0, bims/1,
                          bims_version/2, bims_citation/2,
                          dlp_load/1, dlp_load/2,
-                         dlp_sample/1,dlp_sample/5,
+                         dlp_sample/1,dlp_sample/3,
                          dlp_seed/0, dlp_path_prob/2, dlp_path_prob/3
                          ] ).
 

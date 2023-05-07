@@ -29,6 +29,6 @@ dlp_sample( Goal, Path, Prb ) :-
      Goal =.. [Functor|Args],
      length( Args, Arity ),
      spec_constructs_scall( Functor/Arity, _Type, Path, Args, Slp ), 
-     path_to_probability( Path, 1, Prb ),
-     !.
+     dlp_ssd:Slp,
+     !,
      dlp_path_prob( Path, 1, Prb ).
