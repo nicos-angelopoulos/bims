@@ -21,5 +21,5 @@ dlp_path_prob( Path, Prob ) :-
 
 dlp_path_prob( [], Prob, Prob ).
 dlp_path_prob( [H|T], Curr, Prob ) :-
-     ( (H:This;H/This) -> Next is Curr * This ; Next is Curr ),
+     ( (H=_Cl1:This;H=_Cl2/This) -> Next is Curr * This ; Next is Curr ),
      dlp_path_prob( T, Next, Prob ).

@@ -11,7 +11,15 @@ Thus a clause with probability label of =|1/2|= will be selected twice as often 
 clause that has probability label of =|1/4|=.
 
 ==
-?- 
+?- dlp_load(coin).
+?- dlp_seed.
+?- dlp_sample(coin(Flip)).
+
+?- dlp_sample(coin(Flip)).
+
+?- dlp_seed.
+?- dlp_sample(coin(Flip),Path,Prb).
+?- dlp_sample(coin(Flip),Path,Prb).
 ==
 
 @author nicos angelopoulos
@@ -31,4 +39,5 @@ dlp_sample( Goal, Path, Prb ) :-
      spec_constructs_scall( Functor/Arity, _Type, Path, Args, Slp ), 
      dlp_ssd:Slp,
      !,
+     trace,
      dlp_path_prob( Path, 1, Prb ).
