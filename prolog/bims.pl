@@ -1,4 +1,10 @@
-:- module( bims, [bims/0,bims/1,bims_version/2,bims_citation/2,dlp_load/1,dlp_load/2] ).
+:- module( bims,  [
+                         bims/0, bims/1,
+                         bims_version/2, bims_citation/2,
+                         dlp_load/1, dlp_load/2,
+                         dlp_sample/1,dlp_sample/5,
+                         dlp_seed/0, dlp_path_prob/2, dlp_path_prob/3
+                         ] ).
 
 :- use_module( library(lib) ).
 % :- ensure_loaded( '../src/mcmcms' ).
@@ -20,6 +26,7 @@
 :- lib(get_date_time/1).
 :- lib(ord_only_add_elem/3).  % needed on ad_expand
 :- lib(dlp_load/1).
+:- lib(dlp_sample/1).
 :- lib(end(bims)).
 % :- lib_pack_end( bims ).
 
