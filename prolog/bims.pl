@@ -386,6 +386,7 @@ Atom is the atom representation suitable for printing while Bibterm
 is a bibtex(Type,Key,Pairs) term of the same publication. 
 On backtracking it produces all publications in reverse chronological order.
 
+==
 ?- bims_citation(A, G), write(A), nl.
 
 Distributional Logic Programming for Bayesian Knowledge Representation. 
@@ -395,12 +396,14 @@ Nicos Angelopoulos and James Cussens.
 International Journal of Approximate Reasoning (IJAR).
 
 Volume 80, January 2017, pages 52-66.
+==
 
-
+In total
+==
 ?- findall( A, bims_citation(A,G), Pubs ), length( Pubs, Length ).
 Pubs = [...],
 Length = 5.
-
+==
 */
 
 bims_citation( Atom, bibtex(Type,Key,Pairs) ) :-
