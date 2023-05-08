@@ -174,7 +174,6 @@ print_args( Stats, F,S,K,M,B,P,R,D,H,Seed ) :-
      nl( Stats ).
            
 main_statistics( Sum, Stats ) :-
-     trace,
      datime( Datime ), 
      nl( Stats ),
      pc( Stats, Datime ),
