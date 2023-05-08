@@ -384,9 +384,9 @@ bims_version( 3:0:0, date(2023,5,8) ).
 Succeeds once for each publication related to this library.
 Atom is the atom representation suitable for printing while Bibterm 
 is a bibtex(Type,Key,Pairs) term of the same publication. 
-Produces all related publications on backtracking.
+On backtracking it produces all publications in reverse chronological order.
 
-?- bims_citation( A, G ), write( A ) nl.
+?- bims_citation(A, G), write(A), nl.
 
 Distributional Logic Programming for Bayesian Knowledge Representation. 
 
@@ -395,6 +395,11 @@ Nicos Angelopoulos and James Cussens.
 International Journal of Approximate Reasoning (IJAR).
 
 Volume 80, January 2017, pages 52-66.
+
+
+?- findall( A, bims_citation(A,G), Pubs ), length( Pubs, Length ).
+Pubs = [...],
+Length = 5.
 
 */
 
@@ -447,6 +452,25 @@ In 19th International Joint Conference on Artificial Intelligence (IJCAI-05), 64
                 month   = 'August',
                 year    = 2005
             ].
+
+bims_citation( Atom, bibtex(Type,Key,Pairs) ) :-
+    Atom    = 'Tempering for Bayesian C&RT. 
+Angelopoulos, Nicos and Cussens, James (2005)
+In 22nd International Conference on Machine Learning (ICML 2005), 17-24, Bonn, Germany, August 2005.',
+  Type      = inproceedings,
+  Key       = 'AngelopoulosN_CussensJ_2005a',
+  Pairs     = [
+               title    = 'Tempering for {B}ayesian {C&RT}',
+               author   = 'Angelopoulos, Nicos and Cussens, James',
+               booktitle= '22nd International Conference on Machine Learning (ICML 2005)',
+               address  = 'Bonn, Germany',
+               publisher= 'ACM',
+               month    = 'August',
+               pages    = '17-24',
+               year     = '2005',
+               url      = 'ftp://ftp.cs.york.ac.uk/pub/aig/Papers/james.cussens/icml05.pdf'
+  ].
+
 bims_citation( Atom, bibtex(Type,Key,Pairs) ) :-
     Atom    = 'Markov chain Monte Carlo using tree-based priors on model structure.
 Nicos Angelopoulos and James Cussens (2001).
