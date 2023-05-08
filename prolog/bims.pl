@@ -225,12 +225,12 @@ If the argument (Opts) does not correspond to a file is take to be a list of opt
 The simplest way to use the software is to make a new directory and run some MCMC chains.
 The default call,
 ==
-?- bims().    % equivelant to ?- bims([]).
+?- bims().    % equivalent to ?- bims([]).
 ==
 runs a 3 chains (R=3, below) 100 iterations (I=100) MCMC simulation.
 The models learnt are classifications trees (carts) based on the default prior
 and the data are the BCW dataset.
-The above call is equivelant to:
+The above call is equivalent to:
 ==
 ?- bims([models(carts)]).
 ==
