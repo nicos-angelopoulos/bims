@@ -46,7 +46,7 @@ c(5, 6).
 
 */
 
-:- lib(en_list/2).
+:- lib(stoics_lib:en_list/2).
 
 portray_clauses( List, Opt ) :-
     en_list( Opt, Opts ),

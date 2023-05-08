@@ -1,5 +1,5 @@
 
-:- lib( en_list/2 ).
+:- lib(stoics_lib:en_list/2).
 
 /**  file_name_extends( File, ExtS, ExtFile ).
 
