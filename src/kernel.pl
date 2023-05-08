@@ -39,7 +39,6 @@ kernel( SGl, HotClss, I, Bid, P, ResO ) :-
      bims_bb_put( s_random_prod, [] ),
      bims_bb_put( s_random_avail, [] ),
      bims_bb_put( s_random_cons, [] ),
-     trace,
 	initial_slp( Msd, Slp ),
 	initial_hot_chain_models( HotClss, Bid, Prd/Arity, Type, Args, Msd, HotChns ),
 	( current_predicate(bims_lkl:to_model/3) ->
