@@ -60,8 +60,8 @@ and programming appropriate priors.
 ---+++ Carts examples
 
 ==
-?- bims( [] ).
-?- bims( [data(carts),models(carts),likelihood(carts)] ).
+?- bims([]).
+?- bims([data(carts),models(carts),likelihood(carts)]).
 ==
 
 The above are two equivalent ways to run the Carts example provided. 
@@ -81,8 +81,8 @@ discussion). J. of the American Statistical Association, 93:935–960, 1998.
 ---+++ Bns examples
 
 ==
-?- bims( [models(bns)] ).
-?- bims( [data(bns),models(bns),likelihood(bns)] ).
+?- bims([models(bns)]).
+?- bims([data(bns),models(bns),likelihood(bns)]).
 ==
 The above are two equivalent ways to run the Bns example provided. 
 
@@ -111,7 +111,7 @@ of the data file.
 
 For example, 
 ==
-?- bims( data(mydata) ).
+?- bims(data(mydata)).
 ==
 
 ---+++ Learning new statistical models.
@@ -225,7 +225,7 @@ If the argument (Opts) does not correspond to a file is take to be a list of opt
 The simplest way to use the software is to make a new directory and run some MCMC chains.
 The default call,
 ==
-?- bims().    % equivalent to ?- bims([]).
+?- bims.    % equivalent to ?- bims([]).
 ==
 runs a 3 chains (R=3, below) 100 iterations (I=100) MCMC simulation.
 The models learnt are classifications trees (carts) based on the default prior
@@ -237,7 +237,7 @@ The above call is equivalent to:
 
 To run a toy BN learning example run
 ==
-?- bims( [models(bns)] ).
+?- bims([models(bns)]).
 ==
 
 This runs 3 chains on some synthetic data of the 8-nodal Asia BN.
@@ -246,7 +246,7 @@ To get familiar on how to run bims on private data, make a new directory,
 create a subdirecory =|data|= and copy file bims(data/asia.pl) to 
 data/test_local.pl.
 ==
-?- bims( [data(test_local)] ).
+?- bims([data(test_local)]).
 ==
 
 Opts 
