@@ -49,11 +49,23 @@ Prob is the sum of probabilities for all refutations of Goal- which should be a 
 Standard SLD resolution is used to derive all refutations.
 
 ==
+?- dlp_load(doubles).
 ?- dlp_call_sum(coin(Flip), Prb).
 Prb = 1.0.
 
 ?- dlp_call_sum(coin(head), Prb).
 Prb = 0.5.
+
+?- dlp_call_sum(doubles(head), Prb).
+Prb = 0.25.
+
+?- dlp_call_sum(doubles(_), Prb).
+Prb = 0.5.
+==
+
+A more interesting example
+==
+?- dlp_load(umember).
 ==
 
 @author nicos angelopoulos

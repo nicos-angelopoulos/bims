@@ -3,7 +3,7 @@
 % :- ensure_loaded( '../../src/init_lib' ).
 
 % :- requires( bims:kv_compose_fixed_v/3 ).
-:- ensure_loaded( kv_compose_fixed_v ).
+:- bims_re_load(kv_compose_fixed_v).
 
 % These assume Alpha_i = 1.
 % We follow, Eq. 16, Bayesian Cart Model Search, Chipman et al 

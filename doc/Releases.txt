@@ -11,6 +11,7 @@
                  CLEAN:  remove local vers of portray_clauses.pl and goal_spec.pl
                  DOC:    sampling in module docs
                  DOC:    preds index section
+                 FIXED:  can re-run chains now, introducing bims_re_load/1
     2022/11/06   CHANGED: codes_n_digits/3 -> lexi_n/4
 
 2.5              @ 2022/01/02

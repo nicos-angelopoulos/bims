@@ -1,6 +1,7 @@
 
-:- ensure_loaded( 'src/cart_llhood' ).
-:- ensure_loaded( '../../src/cart_red_model' ).
+:-  get_time(Stamp), load_files('../../../../src/lib/bims_re_load', [modifiled(Stamp)] ).
+:- bims_re_load( 'src/cart_llhood' ).
+:- ensure_loaded( '../../src/cart_red_model' ). % do we need to bims_re_load/1 this ?
 
 lhood_canonical( Cart1, Cart2, Llhood1, Llhood2, Ratio ) :-
 	llhood_w_diff( Cart1, Cart2, Llhood1, Llhood2, Diff ),
