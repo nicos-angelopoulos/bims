@@ -119,6 +119,45 @@ For example,
 By defining a new likelihood function and new priors 
 the system can be used on new statistical models.
 
+---++ Resolution
+In addition to model structure learning Bims implements two way of performing resolution over DLPs:
+stochastic sampling resolution (SSD) and SLD-based probabilisic inference.
+
+---+++ Stochastic sampling definite clause (SSD) resolution 
+
+These predicates allow to sample from a loaded distributional logic program (Dlp). The resolution strategy here
+are that of chosing between probabilistic choices according to their relative values. The main idea is that
+when sampling many times from a top goal will in the long run sample each derivation path in proportion 
+to the probability of the derivation. The probability of a derivation/refutation, is simply the product 
+of all the probabilities attached to resolution steps during the derivation. 
+
+See
+  * dlp_sample/1
+  * dlp_sample/3
+
+### SLD-based probabilisic inference
+
+These predicates allow standard SLD exploration of a stochastic query against a DLP. Predicates here
+allow to explore what is derivable and often attach a probability and ather information to each derivation.
+
+Note that in probabilistic inference we often are more interested in failures than in standard LP. 
+This is because there is a probability mass loss which each failed probabilistic branch.
+
+Probabilistic inference predicates
+  * dlp_call/1
+  * dlp_call/3
+  * dlp_call_sum/2
+
+## Predicates index
+
+  * bims/0, bims/1
+  * bims_version/2, bims_citation/2
+  * dlp_load/1, dlp_load/2
+  * dlp_sample/1,dlp_sample/3
+  * dlp_call/1,dlp_call/3
+  * dlp_call_sum/2
+  * dlp_seed/0, dlp_path_prob/2, dlp_path_prob/3
+
 ---++ Pack info
 
 @author Nicos Angelopoulos, http://stoics.org.uk/~nicos
@@ -129,6 +168,7 @@ the system can be used on new statistical models.
 @version  2.3 2018/12/21, aux/ -> aux_code
 @version  2.4,2021/12/29, run on SWI 8.5.4; github core complete
 @version  2.5,2022/01/02, src/lib clean-up
+@version  3.0 2023/05/08, sampling & inference preds dlp_*
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
@@ -328,15 +368,16 @@ Version Mj:Mn:Fx, and release date date(Y,M,D).
 
 ==
 ?- bims_version(Vers, Date).
-Vers = 2:5:0,
-Date = date(2022, 1, 2).
+Vers = 3:0:0,
+Date = date(2023, 5, 8).
 ==
 
 @see doc/Releases.txt for more detail on change log
-@version 2:5:0
+@version 2:5:0, 2022/01/02
+@version 3:0:0, 2023/05/08, add sampling and pbc inference preds
 
 */
-bims_version( 2:5:0, date(2022,1,2) ).
+bims_version( 3:0:0, date(2023,5,8) ).
 
 /** bims_citation( -Atom, -Bibterm ).
 

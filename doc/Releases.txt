@@ -1,8 +1,18 @@
 ---   Releases   ---
 --------------------
 
-2.6
+3.0              @ 2023/05/08
+    2023/05/07   IFACE:  dlp_load/1, dlp_load/2,
+                         dlp_sample/1,dlp_sample/3,
+                         dlp_call/1,dlp_call/3,
+                         dlp_call_sum/2,
+                         dlp_seed/0, dlp_path_prob/2, dlp_path_prob/3
+                 FIXED:  can play well with lib(mlu) now 
+                 CLEAN:  remove local vers of portray_clauses.pl and goal_spec.pl
+                 DOC:    sampling in module docs
+                 DOC:    preds index section
     2022/11/06   CHANGED: codes_n_digits/3 -> lexi_n/4
+
 2.5              @ 2022/01/02
     2022/01/02   CLEANUP: A number of dangling files in src/lib were removed
                  DELINK:  opts_select_infiles.pl, atom_number.pl, delete_file_if.pl, file_name_extends.pl
