@@ -11,16 +11,14 @@
 :- use_module(library(lib)).
 % also depends on pack(stoics_lib), pack(lib) will ask to download it if missing
 
-% :- ensure_loaded( '../src/init_lib' ).
+:- ensure_loaded( '../src/init_lib' ).
 :- lib(source(bims), homonyms(true)).
 
-% :- lib(stoics_lib).  % en_list/2, goal_spec/2, portray_clauses/2. 
-% we should consider loading the whole of stoics_lib, as we using many of its preds
-% :- lib(stoics_lib).
+% :- lib(stoics_lib).  % we should consider loading the whole of stoics_lib, as we using many of its preds
+%
 :- lib(stoics_lib:en_list/2).
 :- lib(stoics_lib:goal_spec/2).
-% the following could be had from pack(stoics_lib)
-:- lib(portray_clauses/2).
+:- lib(stoics_lib:portray_clauses/2).
 
 :- lib(mcmcms/12).
 :- lib(os_unique_by_date/2).

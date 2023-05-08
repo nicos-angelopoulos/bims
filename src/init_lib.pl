@@ -1,7 +1,7 @@
 :- multifile library_directory/1.
 :- dynamic library_directory/1.
 
-:- use_module( library(system) ). % Yap directory_files
+:- use_module(library(system)). % Yap directory_files
 
 assert_model_paths :-
 	AbsOpts = [file_type(directory),access(exist),solutions(all)],
