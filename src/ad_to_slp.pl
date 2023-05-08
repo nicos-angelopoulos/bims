@@ -5,6 +5,7 @@
 % :- ensure_loaded( init_lib ).           % library_directory/1...
 :- ensure_loaded( library(lists) ).       % append/3, memberchk/2, length/2.
 :- ensure_loaded( library(system) ).      % /rename_file/2, tmp_file/2.
+:- use_module(library(filesex)).          % make_direcotry_path/1
 
 % :- ensure_loaded( library(cc) ).        % init_cc/0, next_cc/1, bims_bb_get(cc).
 :- lib(stoics_lib:en_list/2).
@@ -58,7 +59,8 @@ ad_to_slp( InOpts ) :-
      built_ins_to_file( Tmp ),
 	memberchk( load(Load), Opts ),
 	once( load_method_to_load_pname( Load, LdPname ) ),
-	LoadCall =.. [LdPname,Tmp],
+     ad_tmp_file( Tmp, Mod, ModTmp ),
+	LoadCall =.. [LdPname,ModTmp],
 	call( LoadCall ),
 	% abolish( ad:_ ),
      memberchk( ad_clean(Adc), Opts ),
@@ -73,6 +75,17 @@ ad_to_slp( InOpts ) :-
 			rename_file( Tmp, Rm )
 		)
 	).
+
+% 23.05.08
+% each module is loaded from a single location $TMP/bims/<Mod>.pl 
+%
+ad_tmp_file( Tmp, Mod, ModTmp ) :-
+     current_prolog_flag( tmp_dir, TmpDir ),
+     directory_file_path( TmpDir, bims, BimsTmpD ),
+     make_directory_path( BimsTmpD ),
+     file_name_extension( Mod, pl, PlF ),
+     directory_file_path( BimsTmpD, PlF, ModTmp ),
+     copy_file( Tmp, ModTmp ).
 
 ad_clean( false ) :- !.
 ad_clean( _ ) :-         % make this the "super" default

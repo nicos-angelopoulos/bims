@@ -66,6 +66,21 @@ Prb = 0.5.
 A more interesting example
 ==
 ?- dlp_load(umember).
+
+?- dlp_call_sum( umember([a,b,c,d],X), Prb ).
+Prb = 1.0.
+
+?- dlp_call_sum( umember([a,b,c,d],a), Prb ).
+Prb = 0.25.
+
+?- dlp_call_sum( umember([a,b,c,d],b), Prb ).
+Prb = 0.25.
+
+?- dlp_call_sum( umember([a,b,c,d],c), Prb ).
+Prb = 0.25.
+
+?- dlp_call_sum( umember([a,b,c,d],d), Prb ).
+Prb = 0.25.
 ==
 
 @author nicos angelopoulos
