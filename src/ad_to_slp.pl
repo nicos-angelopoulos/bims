@@ -243,7 +243,8 @@ initial_slp_declarations_to_file( File, Mod, Msd ) :-
 	directory_file_path( Bims, 'src/runtime', RunTimeD ),
 	atomic_list_concat( [runtime,Msd], '_', Bname ),
 	directory_file_path( RunTimeD, Bname, AbsRunTime ),
-	portray_clause( Stream, :- compile(AbsRunTime) ),
+	% portray_clause( Stream, :- compile(AbsRunTime) ),
+	portray_clause( Stream, :- consult(AbsRunTime) ),
 	nl( Stream ),
 	pl(yap(_Y), (
 		write(Stream,':- source.'), nl(Stream), nl(Stream) )
@@ -498,9 +499,11 @@ kv_tri_decompose( [], [], [], [] ).
 kv_tri_decompose( [H1-H2-H3|T], [H1|T1], [H2|T2], [H3|T3] ) :-
 	kv_tri_decompose( T, T1, T2, T3 ).
 
-load_method_to_load_pname( cm, compile ).
+% load_method_to_load_pname( cm, compile ).
+load_method_to_load_pname( cm, consult).
 load_method_to_load_pname( cn, consult ).
-load_method_to_load_pname( compile, compile ).
+% load_method_to_load_pname( compile, compile ).
+load_method_to_load_pname( compile, consult).
 load_method_to_load_pname( consult, consult ).
 load_method_to_load_pname( Unk, _ ) :-
 	Unk \== cm, Unk \== cn,

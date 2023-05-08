@@ -13,9 +13,9 @@
 
 :- ensure_loaded( library(lists) ).          % memberchk/2.
 
-:- compile('aux_code/ord_int_intersection'). % /4.
-:- compile('pselect.dlp').                   % /3.
-:- compile('psplit.dlp').                    % /4.
+:- compile_pl('aux_code/ord_int_intersection'). % /4.
+:- compile_pl('pselect.dlp').                   % /3.
+:- compile_pl('psplit.dlp').                    % /4.
 
 cart( Cart ) :-
      cart( 0.95/1, Cart ).

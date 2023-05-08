@@ -109,7 +109,9 @@ nth_tmp1( In, N, [H|T], Elem, [H|Rest] ) :-
 
 datime( datime(Yr,Mo,Da,Hr,Mi,Se) ) :-
 	get_time( Time ),
-	convert_time( Time, Yr, Mo, Da, Hr, Mi, Se, _ ).
+     stamp_date_time( Time, DateTime, local ).
+     DateTime = date(Yr, Mo, Da, Hr, Mi, Se, _, _, _ ).
+	% convert_time( Time, Yr, Mo, Da, Hr, Mi, Se, _ ).
 
 % Copied from Yap sources 2006 May
 /* no longer needed !. 20101201, probably for some time now.

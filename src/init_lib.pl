@@ -88,6 +88,11 @@ assert_lib_dir_if( Lib ) :-
 		assertz( user:library_directory(Lib) ) 
 	).
 
+compile_pl( File ) :-
+     pl( swi(_), consult(File) ),
+     pl( yap(_), compile(File) ),
+     pl( sicstus(_), compile(File) ).
+
 mcmcms_maintainer( 'nicos.angelopoulos@gmail.com' ).
 
 :- pl( sicstus(_A), sicstus_start ).
