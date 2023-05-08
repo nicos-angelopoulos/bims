@@ -42,14 +42,14 @@ X = d.
 
 Assuming packs, mlu, b_real and Real are installed, then plots can be created with sampling outputs
 ==
+?- dlp_load(umember).
 ?- lib(mlu)
 ?- mlu_sample( dlp_sample(umember([a,b,c,d,e,f,g,h],X)), 1000, X, Freqs ),
-   mlu_frequency_plot( Freqs, [interface(barplot),outputs(pdf),las = 2]).
+   mlu_frequency_plot( Freqs, [interface(barplot),outputs(svg),las = 2]).
 ==
+Produces file: real_plot.svg
 
-Produces file: real_plot.pdf
-
-[[doc/html/images/real_plot.pdf]]
+[[doc/html/images/real_plot.svg]]
 
 @author nicos angelopoulos
 @version  0:1 2023/05/07

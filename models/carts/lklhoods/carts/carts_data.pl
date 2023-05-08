@@ -34,7 +34,7 @@ carts_data( Opts ) :-
 	% bb_put( num_of_categories, K ),
 	% bb_put( knorm, LogK ),
 	list_to_ord_set( Kategories, Kats ),
-	debug( bims, 'Data categories: ~w', [Kats] ),
+	bims:debug( bims, 'Data categories: ~w', [Kats] ),
 	length( Kats, K ),
 	data_cart_has_category_assert( Kategories, 1, Ids ), 
 		               % asserts data:has_category/2 facts.
@@ -242,11 +242,11 @@ data_cart_weight_pair_assert( K-W, Kats, RemKats ) :-
 	!,
 	data_cart_weight_category_assert( K, W, Kats, RemKats ).
 data_cart_weight_pair_assert( Oth, Kats, Kats ) :-
-	debug( bims, 'Ignoring non-paired weight: ~w, please use Kat-Weight', Oth ).
+	bims:debug( bims, 'Ignoring non-paired weight: ~w, please use Kat-Weight', Oth ).
 
 data_cart_weight_category_assert( K, W, Kats, RemKats ) :-
 	select( K, Kats, RemKats ),
 	!,
 	assert( data:class_weight(K,W) ).
 data_cart_weight_category_assert( K, _W, Kats, Kats ) :-
-	debug( bims, 'Ignoring non-categoried pair: ~w, please use Kat-Weight', K).
+	bims:debug( bims, 'Ignoring non-categoried pair: ~w, please use Kat-Weight', K).

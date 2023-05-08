@@ -3,9 +3,9 @@
 :- op( 550, yfx, ## ).
 
 % :- ensure_loaded( init_lib ).           % library_directory/1...
-:- ensure_loaded( library(lists) ).       % append/3, memberchk/2, length/2.
-:- ensure_loaded( library(system) ).      % /rename_file/2, tmp_file/2.
-:- use_module(library(filesex)).          % make_direcotry_path/1
+% :- ensure_loaded( library(lists) ).       % append/3, memberchk/2, length/2.
+% :- ensure_loaded( library(system) ).      % /rename_file/2, tmp_file/2.
+% :- use_module(library(filesex)).          % make_directory_path/1
 
 % :- ensure_loaded( library(cc) ).        % init_cc/0, next_cc/1, bims_bb_get(cc).
 :- lib(stoics_lib:en_list/2).

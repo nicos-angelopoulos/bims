@@ -1,7 +1,10 @@
+
+:- use_module(library(lists)).  % in both SWI and Yap
+:- use_module(library(debug)).  % in both SWI and Yap
+:- use_module(library(system)). % in both SWI and Yap
+
 :- multifile library_directory/1.
 :- dynamic library_directory/1.
-
-:- use_module(library(system)). % Yap directory_files
 
 assert_model_paths :-
 	AbsOpts = [file_type(directory),access(exist),solutions(all)],
@@ -71,7 +74,10 @@ swi_start :-
         % write( lib(Lib) ), nl,
         assert_lib_dir_if( Lib ).
 	   */
-swi_start.
+swi_start :-
+     use_module(library(listing)),
+     use_module(library(filesex)),
+     true.
 
 assert_lib_dir_if( Lib ) :-
 	( ( current_predicate( library_directory, library_directory(_) ),
