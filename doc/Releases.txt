@@ -2,6 +2,10 @@
 --------------------
 
 3.0              @ 2023/05/08
+    2023/05/08   FIXED:  can re-run chains now, introducing bims_re_load/1
+                 FIXED:  can load additional dlps (dlp_load/1)- ad mods are now loaded from $TMP/bims/<mod>.pl
+                 DEPS:   added standard SWI library dependencies to initial_lib
+                 IFACE:  runtimes are in modules now
     2023/05/07   IFACE:  dlp_load/1, dlp_load/2,
                          dlp_sample/1,dlp_sample/3,
                          dlp_call/1,dlp_call/3,
@@ -11,8 +15,6 @@
                  CLEAN:  remove local vers of portray_clauses.pl and goal_spec.pl
                  DOC:    sampling in module docs
                  DOC:    preds index section
-                 FIXED:  can re-run chains now, introducing bims_re_load/1
-                 FIXED:  can load additional dlps (dlp_load/1)- ad mods are now loaded from $TMP/bims/<mod>.pl
     2022/11/06   CHANGED: codes_n_digits/3 -> lexi_n/4
 
 2.5              @ 2022/01/02

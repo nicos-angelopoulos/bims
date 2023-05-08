@@ -1,3 +1,5 @@
+:- module( runtime_sld, [select_id/6] ).
+
 :- use_module( library(lists) ).		% needed for last_skips/2.
 
 % fixme: 23.05.06: trying SLD resolution for finding all paths

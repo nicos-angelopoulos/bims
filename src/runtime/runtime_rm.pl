@@ -1,3 +1,5 @@
+:- module( runtime_rm, [select_id/6] ).
+
 :- use_module( library(random) ).
 :- use_module( library(lists) ).		% needed for last_skips/2.
 
