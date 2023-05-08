@@ -6,6 +6,7 @@
                  FIXED:  can load additional dlps (dlp_load/1)- ad mods are now loaded from $TMP/bims/<mod>.pl
                  DEPS:   added standard SWI library dependencies to initial_lib
                  IFACE:  runtimes are in modules now
+                 TEST:   auxil/distro runs tests on to-be-installed .tgz
     2023/05/07   IFACE:  dlp_load/1, dlp_load/2,
                          dlp_sample/1,dlp_sample/3,
                          dlp_call/1,dlp_call/3,
