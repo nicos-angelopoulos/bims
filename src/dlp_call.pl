@@ -22,7 +22,19 @@ Flip = tail,
 Path = [2/0.5],
 Prb = 0.5 ;
 false.
+==
 
+Uniform selection of a list member:
+==
+?- dlp_load(umemmber).
+
+?- dlp_call( umember([a,b,c],X), _Path, Prb ).
+X = a,
+Prb = 0.3333333333333333 ;
+X = b,
+Prb = 0.33333333333333337 ;
+X = c,
+Prb = 0.33333333333333337 ;
 ==
 
 @author nicos angelopoulos
