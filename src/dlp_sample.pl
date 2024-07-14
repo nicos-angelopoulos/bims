@@ -49,7 +49,7 @@ Assuming packs, mlu, b_real and Real are installed, then plots can be created wi
 ==
 Produces file: real_plot.svg
 
-[[doc/html/images/real_plot.svg]]
+[[html/images/real_plot.svg]]
 
 @author nicos angelopoulos
 @version  0:1 2023/05/07
