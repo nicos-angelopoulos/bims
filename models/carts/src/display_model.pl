@@ -13,6 +13,35 @@
 /* 
      Model = cart( f1, 1, leaf(_,[]), leaf(_,[]) ),
      display_model( Model, [notitle(true)] )
+
+     This can be used standalone, simply define data:all_categories([0,1]) and
+          data:has_category(9,0).
+          data:has_category(10,0).
+          data:has_category(11,1).
+          data:has_category(12,1).
+
+     Use node_style('') for non-filled nodes
+         node_label(excl_id)  to exclude 'N:' prefix from labels(see more options in code)
+         tmp(_) to supply or get hold of the tmp created
+         clr(Clr) could be colour, bnw, or a list of [Clr-Rplc|...], where Clr could be one of 
+               red    -> Root nodes
+               orange -> inner nodes
+               green  -> leaf nodes
+               aliz -> alarezin -> edges
+               lemonchiffon2 -> title box
+               ... to do... 
+
+    ?- 
+
+    Cart = cart(score,3,L0,R0),
+               L0 = leaf(l1,[9,10]),
+               R0 = leaf(l2,[11,12]),
+     Dts = [   title(a_title), lhood(-0.12),
+               node_style(''), delete(false)
+               ],
+     bims_display_model_cart:display_model( Cart, Dts ).
+
+
      */
 display_model( Cart, Opts ) :-
 	( bims:bims_bb_delete( unique_cart_bid, _ ) -> true ; true ),
@@ -22,13 +51,13 @@ display_model( Cart, Opts ) :-
 	kats_n_zeros( Kats, Zeros ),
 	cart_to_structure( Cart, 1, Kats/Zeros, _, _, Str ),
      % mktemp( tmp_disp_XXXXXX, PrvTmp ),
-     bims:unique_filename( tmp_disp, Tmp, [report(false),extension('')] ),
 	memberchk( title(PrvTitle), CmpOpts ),
 	memberchk( lhood(PrvLlhood), CmpOpts ),
 	memberchk( node_style(NdStl), CmpOpts ),
 	memberchk( balanced(BalBool), CmpOpts ),
 	memberchk( colour(Clr), CmpOpts ),
 	memberchk( node_label(NdLbl), CmpOpts ),
+     memberchk( tmp(Tmp), CmpOpts ),
      % ( memberchk(out_was(Tmp),Opts)-> true; true ),
 	( memberchk(notitle(true),CmpOpts) ->
           Llhood is 0, Title = []
@@ -41,7 +70,7 @@ display_model( Cart, Opts ) :-
      display_model_exec_def_ext( Exec, DefExt ),
      atom_concat( '.', DefExt, Ext ),
 	( memberchk(out(Out),CmpOpts) -> 
-		( var(Out) -> 
+		( var(Out) ->
 			atom_concat( Tmp, Ext, Out ),
                OutExt = Out
 			;
@@ -102,6 +131,7 @@ display_model_defaults( Defs ) :-
 			node_label(NdLbl),
 			node_style(filled), % alt. empty
 			title(cart),
+               tmp(Tmp),
 			trail(' & ') ],
 	/*
 	( (environ('USER','nicos'),environ('HOSTNAME',Hname),
@@ -118,7 +148,8 @@ display_model_defaults( Defs ) :-
           NdLbl = id_and_feature_name
           ;
           NdLbl = id_and_feature
-     ).
+     ),
+     bims:unique_filename( tmp_disp, Tmp, [report(false),extension('')] ).
 			
 kats_n_zeros( Kats, Zeros ) :-
 	( current_predicate(data:has_category/2) ->
@@ -183,7 +214,7 @@ nth_with_new( Nth, [H|T], Old, New, [H|R] ) :-
 	NxNth is Nth - 1,
 	nth_with_new( NxNth, T, Old, New, R ).
 
-classified_to_slashed( [F,S|T], F/R ) :-
+classified_to_slashed( [F,S|T], (F;R) ) :-
 	!,
 	classified_to_slashed( [S|T], R ).
 classified_to_slashed( [E], E ).
@@ -197,13 +228,16 @@ cart_str_to_disp_dag( Str, Lk, Frq, NdStl, NdLbl, Clr, BBool, Dag ) :-
 edges_parents_to_dag( Parents, Leaves, Pairs, Edges, NdStl, NdLbl, Clr, Bal, Lk, Frq, Dag ) :-
 	open( Dag, write, S ),
 	write( S, 'digraph G {' ), nl( S ),
-	write( S, '  node [style=' ), write( S, NdStl ),
-	write( S, ']' ), nl( S ),
+     ( NdStl == '' -> 
+	     true % write( S, '  node []' )
+          ;
+	     write( S, '  node [style=' ), write( S, NdStl ), write( S, ']' ), nl( S )
+     ),
 	write( S, '  node [height=0.5]' ), nl( S ),
 	write( S, '  node [width=1]' ), nl( S ),
 	write( S, '  node [shape=egg]' ), nl( S ),
-	ink_colour( Clr, red, Red ),
-	write( S, '  edge [color=' ), write( S, Red ),
+	ink_colour( Clr, aliz, Aliz ),
+	write( S, '  edge [color=' ), write( S, Aliz ),
 	write( S, ']' ), nl( S ),
 	% write( S, '  1 [color=red]' ), nl( S ),
 	leave_parent_nodes( Pairs, S, NdLbl, Clr ),
@@ -240,10 +274,28 @@ write_title_lines( [H|T], S ) :-
 
 ink_colour( Clr, ClrInk, Ink ) :-
 	( Clr == colour -> 
-		Ink = ClrInk
+          ( ink_colour_val(ClrInk,Ink) ->
+                    true
+                    ;
+		          Ink = ClrInk
+          )
 		;
-		Ink = black
+          ( is_list(Clr) ->
+               ( memberchk(ClrInk-Ink,Clr) ->
+                    true
+                    ;
+                    ( ink_colour_val(ClrInk,Ink) ->
+                              true
+                              ;
+		                    Ink = ClrInk
+                    )
+               )
+               ;
+		     Ink = black
+          )
 	).
+
+ink_colour_val( aliz, '"#E32636"' ).
 
 /*
 bkg_colour( Clr, ClrBkg, Bkg ) :-
@@ -262,7 +314,7 @@ leave_parent_nodes( [Id-Node-F-_Val|T], S, NdLbl, Clr ) :-
 		ink_colour( Clr, green, Green ),
 		write( S, ' [color=' ), write( S, Green ),
 		on_node_label_opt_write( NdLbl, Node, Id+F, S ),
-		write( S, ', shape=rectangle]' ), nl( S )
+		write( S, ', shape=rectangle, style=rounded]' ), nl( S )
 		;
 		( Id =:= 1 ->
 			ink_colour( Clr, red, Red ),
