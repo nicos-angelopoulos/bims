@@ -174,6 +174,7 @@ leaf_ids_classified( [], _Kats, Classified, Classified ).
 leaf_ids_classified( [_H-HClass|T], Kats, Accs, Classified ) :-
 	nth1( Nth, Kats, HClass ), 
 	nth_with_new( Nth, Accs, Old, New, NxAccs ), 
+     !,
 	New is Old + 1,
 	leaf_ids_classified( T, Kats, NxAccs, Classified ).
 
