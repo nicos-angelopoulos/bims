@@ -1,6 +1,9 @@
 ---   Releases   ---
 --------------------
 
+3.1 
+    24.10.06     CHANGE: do not local load depenencies already in bims, at models/carts/src/display_model.pl
+
 3.0              @ 2023/05/08
     2023/05/08   FIXED:  can re-run chains now, introducing bims_re_load/1
                  FIXED:  can load additional dlps (dlp_load/1)- ad mods are now loaded from $TMP/bims/<mod>.pl
