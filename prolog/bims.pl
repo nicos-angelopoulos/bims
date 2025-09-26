@@ -169,6 +169,7 @@ Probabilistic inference predicates
 @version  2.4,2021/12/29, run on SWI 8.5.4; github core complete
 @version  2.5,2022/01/02, src/lib clean-up
 @version  3.0 2023/05/08, sampling & inference preds dlp_*
+@version  3.1 2025/09/26, fixed en_list/2 on variable input + broken bns likelihood
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
@@ -368,8 +369,8 @@ Version Mj:Mn:Fx, and release date date(Y,M,D).
 
 ==
 ?- bims_version(Vers, Date).
-Vers = 3:0:0,
-Date = date(2023, 5, 8).
+Vers = 3:1:0,
+Date = date(2025, 9, 26).
 ==
 
 @see doc/Releases.txt for more detail on change log
@@ -377,7 +378,7 @@ Date = date(2023, 5, 8).
 @version 3:0:0, 2023/05/08, add sampling and pbc inference preds
 
 */
-bims_version( 3:0:0, date(2023,5,8) ).
+bims_version( 3:1:0, date(2025,9,26) ).
 
 /** bims_citation( -Atom, -Bibterm ).
 
