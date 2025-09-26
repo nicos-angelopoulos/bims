@@ -275,7 +275,7 @@ expand_body_calls( (PVrs ## A), Pathin/Ld, ExpCmpl ) :-
 	% ExpCmpl = ( Pathin = [NestIn|Ld], Pathout = [NestOut|Lp], ExpA ),
 	( is_distributional( A ) -> 
 		A =.. [Pred|Args],
-		en_list( PVrs, PrbVrs ),
+          ( var(PVrs) -> PrbVrs = [PVrs]; en_list( PVrs, PrbVrs ) ),
 		ExtA =.. [Pred,PrbVrs|Args]
 		;
 		write( user_error, 'inappropriate use of ## within body goal' ),
@@ -457,7 +457,7 @@ de_module_body( (Mod::InA), _Vs, A ) :- !,
 		;
 		( is_distributional( InA ) -> 
 			InA =.. [Pred|Args],
-			en_list( Mod, ModList ),
+               ( var(Mod) -> ModList = [Mod]; en_list(Mod, ModList) ),
 			A =.. [Pred,ModList|Args]
 			;
 			write( user_error, ':: used for non distributional goal' ),

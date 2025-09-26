@@ -21,8 +21,6 @@
           data:has_category(12,1).
 
      Use node_style('') for non-filled nodes
-         node_label(excl_id)  to exclude 'N:' prefix from labels(see more options in code)
-         tmp(_) to supply or get hold of the tmp created
          clr(Clr) could be colour, bnw, or a list of [Clr-Rplc|...], where Clr could be one of 
                red    -> Root nodes
                orange -> inner nodes
@@ -30,6 +28,9 @@
                aliz -> alarezin -> edges
                lemonchiffon2 -> title box
                ... to do... 
+         node_label(excl_id)  to exclude 'N:' prefix from labels(see more options in code)
+         title(Title) use Title = [] for no title
+         tmp(_) to supply or get hold of the tmp created
 
     ?- 
 
