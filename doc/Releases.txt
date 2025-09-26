@@ -3,6 +3,7 @@
 
 3.1               @ 2025/09/26
     25.09.26     FIXED:  en_list/2 on variable, and broken likelihood for BNs
+                 UPDATE: pack info in Readme
     24.10.06     CHANGE: do not local load depenencies already in bims, at models/carts/src/display_model.pl
 
 3.0              @ 2023/05/08

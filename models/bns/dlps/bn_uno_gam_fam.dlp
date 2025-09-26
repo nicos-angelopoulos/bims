@@ -12,7 +12,7 @@ bn( Nodes, M, A, Bn ) :-
      length( Nodes, NpopSize ),
      Pop is NpopSize - 1,
      bn( Nodes, M, A, Pop, Nodes, Cycled ),
-	write( cycled(Cycled) ), nl,
+	% write( cycled(Cycled) ), nl,
      break_bn_cycles( Cycled, Bn ).
 
 bn( [], _M, _A, _Pop, _Nodes, [] ).

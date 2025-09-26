@@ -83,8 +83,8 @@ See models/carts and models/bns for examples.
 ---++ Pack info
 
 @author Nicos Angelopoulos, http://stoics.org.uk/~nicos
-@author James Cussens (University of York), http://cs.york.ac.uk/~jc
-@version  2.2.0 2017/4/18
+@author James Cussens (University of Bristol), https://jcussens.github.io/
+@version  3.1.0 2025/9/26
 @see http://stoics.org.uk/~nicos/sware/bims
 @tbd bims_default(-Def).
 @tbd test on Windows (and Mac ?)
